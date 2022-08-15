@@ -1,4 +1,5 @@
-import 'package:alquran_mobile_apps/core/function.dart';
+import 'package:alquran_mobile_apps/core/utils/function.dart';
+import 'package:alquran_mobile_apps/features/quran/presentation/pages/quran_menu_page.dart';
 import 'package:flutter/material.dart';
 
 class MainMenuPage extends StatelessWidget {
@@ -127,61 +128,73 @@ class MainMenuPage extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Container(
-                      width: MyFunction.getWidth(context, 152),
-                      height: MyFunction.getHeight(context, 186),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: const Color(0xFFDA8856),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: const Offset(0, 4),
-                            blurRadius: 15,
-                            color: const Color(0xFFE9A983).withOpacity(0.15),
-                          )
-                        ],
-                      ),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            right: MyFunction.getWidth(context, -65),
-                            top: MyFunction.getHeight(context, -8),
-                            child: Image.asset(
-                              "assets/vector/ornament_white.png",
-                              width: MyFunction.getWidth(context, 137.26),
-                              height: MyFunction.getHeight(
-                                context,
-                                146,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) {
+                              return const QuranMenuPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: MyFunction.getWidth(context, 152),
+                        height: MyFunction.getHeight(context, 186),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: const Color(0xFFDA8856),
+                          boxShadow: [
+                            BoxShadow(
+                              offset: const Offset(0, 4),
+                              blurRadius: 15,
+                              color: const Color(0xFFE9A983).withOpacity(0.15),
+                            )
+                          ],
+                        ),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              right: MyFunction.getWidth(context, -65),
+                              top: MyFunction.getHeight(context, -8),
+                              child: Image.asset(
+                                "assets/vector/ornament_white.png",
+                                width: MyFunction.getWidth(context, 137.26),
+                                height: MyFunction.getHeight(
+                                  context,
+                                  146,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: MyFunction.getHeight(context, 18),
-                              horizontal: MyFunction.getWidth(context, 18),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  "assets/vector/book_white.png",
-                                  width: MyFunction.getWidth(context, 43.15),
-                                  height: MyFunction.getHeight(context, 51),
-                                ),
-                                const Spacer(),
-                                const Text(
-                                  "Al Quran",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "Poppins",
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: MyFunction.getHeight(context, 18),
+                                horizontal: MyFunction.getWidth(context, 18),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Image.asset(
+                                    "assets/vector/book_white.png",
+                                    width: MyFunction.getWidth(context, 43.15),
+                                    height: MyFunction.getHeight(context, 51),
                                   ),
-                                )
-                              ],
+                                  const Spacer(),
+                                  const Text(
+                                    "Al Quran",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Poppins",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
