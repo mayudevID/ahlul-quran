@@ -1,5 +1,4 @@
-import 'package:alquran_mobile_apps/core/utils/function.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class CurveClipper extends CustomClipper<Path> {
   @override
