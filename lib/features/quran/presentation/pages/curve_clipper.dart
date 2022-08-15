@@ -9,7 +9,7 @@ class CurveClipper extends CustomClipper<Path> {
     path.lineTo(0, size.height);
     path.lineTo(size.width, size.height);
     path.quadraticBezierTo(
-      size.width - ((50 / 210) * size.width),
+      size.width - ((45 / 210) * size.width),
       size.height / 2,
       size.width,
       0,
