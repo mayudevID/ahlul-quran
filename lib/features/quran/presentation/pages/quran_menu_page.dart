@@ -1,5 +1,6 @@
 import 'package:alquran_mobile_apps/core/utils/function.dart';
 import 'package:alquran_mobile_apps/features/quran/presentation/pages/curve_clipper.dart';
+import 'package:alquran_mobile_apps/features/quran/presentation/widget/list_verse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -231,7 +232,7 @@ class QuranMenuPageContent extends StatelessWidget {
                   color: const Color(0xFFDA8856),
                   size: MyFunction.getWidth(context, 101),
                 ),
-                tabs: [
+                tabs: const [
                   Tab(
                     child: Text(
                       "Surah",
@@ -239,6 +240,7 @@ class QuranMenuPageContent extends StatelessWidget {
                         fontFamily: "Inter",
                         fontSize: 16,
                         color: Color(0xFFDA8856),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -249,6 +251,7 @@ class QuranMenuPageContent extends StatelessWidget {
                         fontFamily: "Inter",
                         fontSize: 16,
                         color: Color(0xFFDA8856),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -259,6 +262,7 @@ class QuranMenuPageContent extends StatelessWidget {
                         fontFamily: "Inter",
                         fontSize: 16,
                         color: Color(0xFFDA8856),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -267,7 +271,23 @@ class QuranMenuPageContent extends StatelessWidget {
             ),
             Expanded(
               child: TabBarView(
-                children: [Text("A"), Text("B"), Text("C")],
+                children: [
+                  MediaQuery.removePadding(
+                    context: context,
+
+                    ///removeTop: true,
+                    child: ListView(
+                      children: [
+                        ListVerse(),
+                        ListVerse(),
+                        ListVerse(),
+                        ListVerse(),
+                      ],
+                    ),
+                  ),
+                  Text("B"),
+                  Text("C"),
+                ],
               ),
             ),
           ],
@@ -306,5 +326,14 @@ class _CirclePainter extends BoxPainter {
       offset + Offset(size + 5, cfg.size!.height),
       _paint,
     );
+    // RRect fullRect = RRect.fromRectAndRadius(
+    //   Rect.fromCenter(
+    //     center: offset + Offset(65, cfg.size!.height),
+    //     width: 50,
+    //     height: 15,
+    //   ),
+    //   const Radius.circular(10),
+    // );
+    // canvas.drawRRect(fullRect, _paint);
   }
 }
