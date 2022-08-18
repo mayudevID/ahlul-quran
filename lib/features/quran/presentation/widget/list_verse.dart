@@ -48,7 +48,7 @@ class ListVerse extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Al Fatihah",
                 style: TextStyle(
                   fontFamily: "Poppins",
