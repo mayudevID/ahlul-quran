@@ -19,18 +19,13 @@ class QuranDataRemoteDataSourceImpl implements QuranDataRemoteDataSource {
     var response =
         await dio.get("https://al-quran-8d642.firebaseio.com/data.json");
 
-    if (kDebugMode) print(response);
-
     if (response.statusCode == 200) {
-      List<dynamic> listResponse = response.data;
-
       List<QuranDataModel> listData = [];
 
-      for (var element in listResponse) {
+      for (var element in response.data) {
         listData.add(QuranDataModel.fromJson(element));
       }
 
-      if (kDebugMode) print(listData);
       return listData;
     } else {
       throw ServerException();

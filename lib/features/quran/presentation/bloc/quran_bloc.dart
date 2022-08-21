@@ -19,6 +19,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
       : _getQuranData = getQuranData,
         super(QuranState()) {
     on<OnGetData>(_onGetData);
+    on<OnSearch>(_onSearch);
   }
 
   final GetQuranData _getQuranData;
@@ -53,10 +54,30 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
         emit(
           state.copyWith(
             listVerse: data,
+            listVerseNew: data,
             loadStatus: LoadStatus.loaded,
           ),
         );
       },
     );
+  }
+
+  void _onSearch(
+    OnSearch event,
+    Emitter<QuranState> emit,
+  ) {
+    if (event.valueSearch == "") {
+      emit(state.copyWith(listVerseNew: state.listVerse));
+    } else {
+      List<QuranData> newData = state.listVerse
+          .where((e) =>
+              e.nama.toLowerCase().contains(event.valueSearch) ||
+              e.nomor.toLowerCase().contains(event.valueSearch) ||
+              e.nama.toLowerCase().startsWith(event.valueSearch) ||
+              e.nomor.toLowerCase().startsWith(event.valueSearch))
+          .toList();
+
+      emit(state.copyWith(listVerseNew: newData));
+    }
   }
 }

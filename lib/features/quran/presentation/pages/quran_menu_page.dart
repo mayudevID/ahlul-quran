@@ -42,7 +42,10 @@ class QuranMenuPageContent extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      Future.delayed(const Duration(milliseconds: 25), () {
+                        Navigator.pop(context);
+                      });
                     },
                     child: Image.asset(
                       "assets/vector/back.png",
@@ -207,6 +210,16 @@ class QuranMenuPageContent extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      onChanged: (val) {
+                        context.read<QuranBloc>().add(OnSearch(val));
+                      },
+                      style: const TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFFDA8856),
+                      ),
+                      cursorColor: const Color(0xFFDA8856),
                       decoration: const InputDecoration.collapsed(
                         hintText: "Cari",
                         hintStyle: TextStyle(
@@ -288,11 +301,10 @@ class QuranMenuPageContent extends StatelessWidget {
                         );
                       } else if (state.loadStatus == LoadStatus.loaded) {
                         return ListView.builder(
-                          itemCount: state.listVerse.length,
+                          itemCount: state.listVerseNew.length,
                           itemBuilder: (context, index) {
                             return ListVerse(
-                              index: index + 1,
-                              quranData: state.listVerse[index],
+                              quranData: state.listVerseNew[index],
                             );
                           },
                         );

@@ -10,3 +10,9 @@ abstract class QuranEvent extends Equatable {
 class OnGetData extends QuranEvent {
   const OnGetData();
 }
+
+class OnSearch extends QuranEvent {
+  const OnSearch(this.valueSearch);
+
+  final String valueSearch;
+}
