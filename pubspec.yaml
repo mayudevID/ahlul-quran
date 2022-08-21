@@ -30,10 +30,12 @@ dependencies:
   bloc: ^8.1.0
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
+  dio: ^4.0.6
   equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -86,6 +88,12 @@ flutter:
         - asset: assets/fonts/Poppins-Medium.ttf
         - asset: assets/fonts/Poppins-SemiBold.ttf
         - asset: assets/fonts/Poppins-Thin.ttf
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/Amiri-Bold.ttf
+        - asset: assets/fonts/Amiri-BoldItalic.ttf
+        - asset: assets/fonts/Amiri-Italic.ttf
+        - asset: assets/fonts/Amiri-Regular.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

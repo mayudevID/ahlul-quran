@@ -1,16 +1,22 @@
-import 'package:alquran_mobile_apps/core/utils/function.dart';
-import 'package:alquran_mobile_apps/features/quran/presentation/pages/curve_clipper.dart';
 import 'package:alquran_mobile_apps/features/quran/presentation/widget/list_verse.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/utils/function.dart';
+import '../../../../injection_container.dart';
+import '../bloc/quran_bloc.dart';
+import 'curve_clipper.dart';
 
 class QuranMenuPage extends StatelessWidget {
   const QuranMenuPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return QuranMenuPageContent();
+    return BlocProvider(
+      create: (_) => sl<QuranBloc>()..add(const OnGetData()),
+      child: const QuranMenuPageContent(),
+    );
   }
 }
 
@@ -101,7 +107,7 @@ class QuranMenuPageContent extends StatelessWidget {
                             topLeft: Radius.circular(10),
                             bottomLeft: Radius.circular(10),
                           ),
-                          color: const Color(0xFFDA8856),
+                          color: Color(0xFFDA8856),
                         ),
                       ),
                     ),
@@ -272,18 +278,34 @@ class QuranMenuPageContent extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  MediaQuery.removePadding(
-                    context: context,
-
-                    ///removeTop: true,
-                    child: ListView(
-                      children: [
-                        ListVerse(),
-                        ListVerse(),
-                        ListVerse(),
-                        ListVerse(),
-                      ],
-                    ),
+                  BlocBuilder<QuranBloc, QuranState>(
+                    builder: (context, state) {
+                      if (state.loadStatus == LoadStatus.loading) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Color(0xFFDA8856),
+                          ),
+                        );
+                      } else if (state.loadStatus == LoadStatus.loaded) {
+                        return ListView.builder(
+                          itemCount: state.listVerse.length,
+                          itemBuilder: (context, index) {
+                            return ListVerse(
+                              index: index + 1,
+                              quranData: state.listVerse[index],
+                            );
+                          },
+                        );
+                      } else if (state.loadStatus == LoadStatus.error) {
+                        return Center(
+                          child: Text(state.errorMessage),
+                        );
+                      } else {
+                        return const Center(
+                          child: Text("Initialize"),
+                        );
+                      }
+                    },
                   ),
                   Text("B"),
                   Text("C"),

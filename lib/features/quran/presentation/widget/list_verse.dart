@@ -1,11 +1,18 @@
+import 'package:alquran_mobile_apps/features/quran/data/models/quran_data_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../../core/utils/function.dart';
+import '../../domain/entities/quran_data.dart';
 
 class ListVerse extends StatelessWidget {
-  const ListVerse({Key? key}) : super(key: key);
+  const ListVerse({
+    Key? key,
+    required this.quranData,
+    required this.index,
+  }) : super(key: key);
+
+  final QuranData quranData;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +35,10 @@ class ListVerse extends StatelessWidget {
                   width: MyFunction.getWidth(context, 37),
                   height: MyFunction.getHeight(context, 37),
                 ),
-                const Center(
+                Center(
                   child: Text(
-                    "1",
-                    style: TextStyle(
+                    index.toString(),
+                    style: const TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -48,9 +55,9 @@ class ListVerse extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Al Fatihah",
-                style: TextStyle(
+              Text(
+                quranData.nama,
+                style: const TextStyle(
                   fontFamily: "Poppins",
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -63,12 +70,14 @@ class ListVerse extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "MEKKAH",
+                    (quranData.type == VerseType.MADINAH)
+                        ? "MADINAH"
+                        : "MEKKAH",
                     style: TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 11,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF292C29).withOpacity(0.6),
+                      color: const Color(0xFF292C29).withOpacity(0.6),
                     ),
                   ),
                   SizedBox(
@@ -79,19 +88,19 @@ class ListVerse extends StatelessWidget {
                     height: MyFunction.getHeight(context, 4),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0xFFBBC4CE).withOpacity(0.35),
+                      color: const Color(0xFFBBC4CE).withOpacity(0.35),
                     ),
                   ),
                   SizedBox(
                     width: MyFunction.getWidth(context, 5),
                   ),
                   Text(
-                    "7 AYAT",
+                    "${quranData.ayat} AYAT",
                     style: TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 11,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF292C29).withOpacity(0.6),
+                      color: const Color(0xFF292C29).withOpacity(0.6),
                     ),
                   ),
                 ],

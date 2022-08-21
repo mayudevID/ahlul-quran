@@ -1,7 +1,10 @@
-import 'package:alquran_mobile_apps/features/home/main_menu.dart';
 import 'package:flutter/material.dart';
+import 'injection_container.dart' as di;
+import 'features/home/main_menu.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(const MyApp());
 }
 
