@@ -1,9 +1,9 @@
-import 'package:alquran_mobile_apps/features/quran/domain/repositories/quran_data_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import 'features/quran/data/datasources/quran_data_remote_data_source.dart';
 import 'features/quran/data/repositories/quran_data_repository_impl.dart';
+import 'features/quran/domain/repositories/quran_data_repository.dart';
 import 'features/quran/domain/usecases/get_quran_data.dart';
 import 'features/quran/presentation/bloc/quran_bloc.dart';
 

@@ -1,6 +1,7 @@
-import 'package:alquran_mobile_apps/core/utils/function.dart';
-import 'package:alquran_mobile_apps/features/quran/presentation/pages/quran_menu_page.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/utils/function.dart';
+import '../quran/presentation/pages/quran_menu_page.dart';
 
 class MainMenuPage extends StatelessWidget {
   MainMenuPage({Key? key}) : super(key: key);

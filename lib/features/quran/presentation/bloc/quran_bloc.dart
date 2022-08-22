@@ -1,12 +1,12 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:alquran_mobile_apps/core/usecases/usecase.dart';
-import 'package:alquran_mobile_apps/features/quran/domain/entities/quran_data.dart';
-import 'package:alquran_mobile_apps/features/quran/domain/usecases/get_quran_data.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/error/failures.dart';
+import '../../../../core/usecases/usecase.dart';
+import '../../domain/entities/quran_data.dart';
+import '../../domain/usecases/get_quran_data.dart';
 
 part 'quran_event.dart';
 part 'quran_state.dart';

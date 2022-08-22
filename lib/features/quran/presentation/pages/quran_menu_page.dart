@@ -1,4 +1,3 @@
-import 'package:alquran_mobile_apps/features/quran/presentation/widget/list_verse.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/function.dart';
 import '../../../../injection_container.dart';
 import '../bloc/quran_bloc.dart';
+import '../widgets/list_surah.dart';
 import 'curve_clipper.dart';
 
 class QuranMenuPage extends StatelessWidget {
