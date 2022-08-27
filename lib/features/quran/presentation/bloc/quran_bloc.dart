@@ -53,8 +53,8 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
       (data) {
         emit(
           state.copyWith(
-            listVerse: data,
-            listVerseNew: data,
+            listSurah: data,
+            listSurahNew: data,
             loadStatus: LoadStatus.loaded,
           ),
         );
@@ -67,9 +67,9 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     Emitter<QuranState> emit,
   ) {
     if (event.valueSearch == "") {
-      emit(state.copyWith(listVerseNew: state.listVerse));
+      emit(state.copyWith(listSurahNew: state.listSurah));
     } else {
-      List<QuranData> newData = state.listVerse
+      List<QuranData> newData = state.listSurah
           .where((e) =>
               e.nama.toLowerCase().contains(event.valueSearch) ||
               e.nomor.toLowerCase().contains(event.valueSearch) ||
@@ -77,7 +77,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
               e.nomor.toLowerCase().startsWith(event.valueSearch))
           .toList();
 
-      emit(state.copyWith(listVerseNew: newData));
+      emit(state.copyWith(listSurahNew: newData));
     }
   }
 }

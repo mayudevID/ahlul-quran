@@ -16,12 +16,3 @@ class GetQuranData implements UseCase<List<QuranData>, NoParams> {
     return await quranDataRepository.getQuranData();
   }
 }
-
-class Params extends Equatable {
-  final int number;
-
-  const Params({required this.number});
-
-  @override
-  List<Object> get props => [number];
-}

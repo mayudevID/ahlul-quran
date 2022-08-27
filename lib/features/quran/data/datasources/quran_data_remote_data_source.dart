@@ -1,9 +1,6 @@
-import 'dart:convert';
-
-import 'package:alquran_mobile_apps/core/error/exceptions.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
+import '../../../../core/error/exceptions.dart';
 import '../models/quran_data_model.dart';
 
 abstract class QuranDataRemoteDataSource {

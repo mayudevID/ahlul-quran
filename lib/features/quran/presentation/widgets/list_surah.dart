@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/function.dart';
 import '../../domain/entities/quran_data.dart';
 
-class ListVerse extends StatelessWidget {
-  const ListVerse({
+class ListSurah extends StatelessWidget {
+  const ListSurah({
     Key? key,
     required this.quranData,
   }) : super(key: key);

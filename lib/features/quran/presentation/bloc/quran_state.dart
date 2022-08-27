@@ -4,27 +4,27 @@ enum LoadStatus { empty, loading, loaded, error }
 
 class QuranState extends Equatable {
   QuranState({
-    List<QuranData>? listVerse,
-    List<QuranData>? listVerseNew,
+    List<QuranData>? listSurah,
+    List<QuranData>? listSurahNew,
     this.loadStatus = LoadStatus.empty,
     this.errorMessage = "",
-  })  : listVerse = listVerse ?? [],
-        listVerseNew = listVerseNew ?? [];
+  })  : listSurah = listSurah ?? [],
+        listSurahNew = listSurahNew ?? [];
 
-  final List<QuranData> listVerse;
-  final List<QuranData> listVerseNew;
+  final List<QuranData> listSurah;
+  final List<QuranData> listSurahNew;
   final LoadStatus loadStatus;
   final String errorMessage;
 
   QuranState copyWith({
-    final List<QuranData>? listVerse,
-    final List<QuranData>? listVerseNew,
+    final List<QuranData>? listSurah,
+    final List<QuranData>? listSurahNew,
     final LoadStatus? loadStatus,
     final String? errorMessage,
   }) {
     return QuranState(
-      listVerse: listVerse ?? this.listVerse,
-      listVerseNew: listVerseNew ?? this.listVerseNew,
+      listSurah: listSurah ?? this.listSurah,
+      listSurahNew: listSurahNew ?? this.listSurahNew,
       loadStatus: loadStatus ?? this.loadStatus,
       errorMessage: errorMessage ?? this.errorMessage,
     );
@@ -33,8 +33,8 @@ class QuranState extends Equatable {
   @override
   // TODO: implement props
   List<Object?> get props => [
-        listVerse,
-        listVerseNew,
+        listSurah,
+        listSurahNew,
         loadStatus,
         errorMessage,
       ];

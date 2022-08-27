@@ -1,10 +1,11 @@
-import 'package:alquran_mobile_apps/features/quran/domain/entities/quran_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/function.dart';
+import '../../../../injection_container.dart';
 import '../../../quran/data/models/quran_data_model.dart';
+import '../../../quran/domain/entities/quran_data.dart';
+import '../bloc/list_verse_bloc.dart';
 import '../widgets/list_verse.dart';
 
 class ListVersePage extends StatelessWidget {
@@ -14,8 +15,14 @@ class ListVersePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListVersePageContent(
-      quranData: quranData,
+    return BlocProvider(
+      create: (context) => sl<ListVerseBloc>()
+        ..add(
+          OnGetVerseData(quranData.nomor),
+        ),
+      child: ListVersePageContent(
+        quranData: quranData,
+      ),
     );
   }
 }
@@ -145,9 +152,7 @@ class ListVersePageContent extends StatelessWidget {
                     height: MyFunction.getHeight(context, 53),
                   ),
                 ),
-                // SizedBox(
-                //   width: MyFunction.getWidth(context, 18),
-                // ),
+
                 Text(
                   (quranData.type == VerseType.MADINAH) ? "Madinah" : "Mekkah",
                   style: const TextStyle(
@@ -222,17 +227,37 @@ class ListVersePageContent extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: MediaQuery.removePadding(
-              context: context,
-              removeTop: true,
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  ListVerse(),
-                  ListVerse(),
-                  ListVerse(),
-                ],
-              ),
+            child: BlocBuilder<ListVerseBloc, ListVerseState>(
+              builder: (context, state) {
+                if (state.loadStatus == LoadStatus.loading) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Color(0xFFDA8856),
+                    ),
+                  );
+                } else if (state.loadStatus == LoadStatus.loaded) {
+                  return MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.builder(
+                      itemCount: state.listVerse.length,
+                      itemBuilder: (context, index) {
+                        return ListVerse(
+                          verseData: state.listVerse[index],
+                        );
+                      },
+                    ),
+                  );
+                } else if (state.loadStatus == LoadStatus.error) {
+                  return Center(
+                    child: Text(state.errorMessage),
+                  );
+                } else {
+                  return const Center(
+                    child: Text("Initialize"),
+                  );
+                }
+              },
             ),
           )
         ],

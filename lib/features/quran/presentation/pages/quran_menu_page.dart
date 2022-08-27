@@ -6,7 +6,7 @@ import '../../../../core/utils/function.dart';
 import '../../../../injection_container.dart';
 import '../bloc/quran_bloc.dart';
 import '../widgets/list_surah.dart';
-import 'curve_clipper.dart';
+import '../widgets/curve_clipper.dart';
 
 class QuranMenuPage extends StatelessWidget {
   const QuranMenuPage({Key? key}) : super(key: key);
@@ -301,10 +301,10 @@ class QuranMenuPageContent extends StatelessWidget {
                         );
                       } else if (state.loadStatus == LoadStatus.loaded) {
                         return ListView.builder(
-                          itemCount: state.listVerseNew.length,
+                          itemCount: state.listSurahNew.length,
                           itemBuilder: (context, index) {
-                            return ListVerse(
-                              quranData: state.listVerseNew[index],
+                            return ListSurah(
+                              quranData: state.listSurahNew[index],
                             );
                           },
                         );

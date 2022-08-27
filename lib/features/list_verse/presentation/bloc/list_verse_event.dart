@@ -6,3 +6,9 @@ abstract class ListVerseEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class OnGetVerseData extends ListVerseEvent {
+  const OnGetVerseData(this.number);
+
+  final String number;
+}

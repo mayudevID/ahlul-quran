@@ -1,9 +1,12 @@
+import 'package:alquran_mobile_apps/features/list_verse/domain/entities/verse_data.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/function.dart';
 
 class ListVerse extends StatelessWidget {
-  const ListVerse({Key? key}) : super(key: key);
+  const ListVerse({Key? key, required this.verseData}) : super(key: key);
+
+  final VerseData verseData;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class ListVerse extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    "1",
+                    verseData.nomor,
                     style: const TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 12,
@@ -45,31 +48,42 @@ class ListVerse extends StatelessWidget {
           SizedBox(
             width: MyFunction.getWidth(context, 4),
           ),
-          Column(
-            children: [
-              const Text(
-                'مْيِحَّﺮﻟا ِنٰمْحَّﺮﻟا ِهّٰﻞﻟا ِمْسِب',
-                locale: Locale('ar', 'AE'),
-                style: TextStyle(
-                  fontFamily: "Amiri",
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black,
-                  fontSize: 18,
+          Expanded(
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    verseData.ar,
+                    //locale: const Locale('ar', 'AE'),
+                    style: TextStyle(
+                      fontFamily: "Amiri",
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black,
+                      fontSize: 20,
+                      height: MyFunction.getHeight(context, 2.5),
+                    ),
+                    textDirection: TextDirection.rtl,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: MyFunction.getHeight(context, 12),
-              ),
-              Text(
-                "Dengan nama",
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 14,
-                  color: const Color(0xFF292C29).withOpacity(0.6),
-                  fontWeight: FontWeight.w400,
+                SizedBox(
+                  height: MyFunction.getHeight(context, 12),
                 ),
-              ),
-            ],
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    verseData.id,
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 14,
+                      color: const Color(0xFF292C29).withOpacity(0.6),
+                      fontWeight: FontWeight.w400,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_conditional_assignment, unnecessary_new, constant_identifier_names
+// ignore_for_file: prefer_conditional_assignment, unnecessary_new, constant_identifier_names, unnecessary_null_comparison
 
 import 'package:alquran_mobile_apps/features/quran/domain/entities/quran_data.dart';
 
