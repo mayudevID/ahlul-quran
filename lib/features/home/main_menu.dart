@@ -16,12 +16,12 @@ class MainMenuPage extends StatelessWidget {
       backgroundColor: const Color(0xFFFFFDF5),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: MyFunction.getWidth(context, 24),
+          horizontal: Func.getWidth(context, 24),
         ),
         child: Column(
           children: [
             SizedBox(
-              height: MyFunction.getHeight(context, 48),
+              height: Func.getHeight(context, 48),
             ),
             Text(
               "Ahlul Quran",
@@ -33,16 +33,16 @@ class MainMenuPage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MyFunction.getHeight(context, 28),
+              height: Func.getHeight(context, 28),
             ),
             SizedBox(
-              height: MyFunction.getHeight(context, 156),
+              height: Func.getHeight(context, 156),
               child: Stack(
                 children: [
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                      height: MyFunction.getHeight(context, 140),
+                      height: Func.getHeight(context, 140),
                       decoration: BoxDecoration(
                         color: const Color(0xFFDA8856),
                         borderRadius: BorderRadius.circular(18),
@@ -50,18 +50,18 @@ class MainMenuPage extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    right: MyFunction.getWidth(context, 24),
+                    right: Func.getWidth(context, 24),
                     child: Image.asset(
                       "assets/vector/petik.png",
-                      width: MyFunction.getWidth(context, 40.63),
-                      height: MyFunction.getHeight(context, 32),
+                      width: Func.getWidth(context, 40.63),
+                      height: Func.getHeight(context, 32),
                     ),
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       width: double.infinity,
-                      height: MyFunction.getHeight(context, 140),
+                      height: Func.getHeight(context, 140),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
                         image: const DecorationImage(
@@ -77,10 +77,10 @@ class MainMenuPage extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                      height: MyFunction.getHeight(context, 140),
+                      height: Func.getHeight(context, 140),
                       padding: EdgeInsets.symmetric(
-                        vertical: MyFunction.getHeight(context, 24),
-                        horizontal: MyFunction.getWidth(context, 24),
+                        vertical: Func.getHeight(context, 24),
+                        horizontal: Func.getWidth(context, 24),
                       ),
                       child: Column(
                         children: [
@@ -88,11 +88,11 @@ class MainMenuPage extends StatelessWidget {
                             children: [
                               Image.asset(
                                 "assets/vector/small_book.png",
-                                width: MyFunction.getWidth(context, 20),
-                                height: MyFunction.getHeight(context, 20),
+                                width: Func.getWidth(context, 20),
+                                height: Func.getHeight(context, 20),
                               ),
                               SizedBox(
-                                width: MyFunction.getWidth(context, 9),
+                                width: Func.getWidth(context, 9),
                               ),
                               const Text(
                                 "Motivasi",
@@ -122,7 +122,7 @@ class MainMenuPage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MyFunction.getHeight(context, 28),
+              height: Func.getHeight(context, 28),
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,8 +141,8 @@ class MainMenuPage extends StatelessWidget {
                         );
                       },
                       child: Container(
-                        width: MyFunction.getWidth(context, 152),
-                        height: MyFunction.getHeight(context, 186),
+                        width: Func.getWidth(context, 152),
+                        height: Func.getHeight(context, 186),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           color: const Color(0xFFDA8856),
@@ -157,12 +157,12 @@ class MainMenuPage extends StatelessWidget {
                         child: Stack(
                           children: [
                             Positioned(
-                              right: MyFunction.getWidth(context, -65),
-                              top: MyFunction.getHeight(context, -8),
+                              right: Func.getWidth(context, -65),
+                              top: Func.getHeight(context, -8),
                               child: Image.asset(
                                 "assets/vector/ornament_white.png",
-                                width: MyFunction.getWidth(context, 137.26),
-                                height: MyFunction.getHeight(
+                                width: Func.getWidth(context, 137.26),
+                                height: Func.getHeight(
                                   context,
                                   146,
                                 ),
@@ -170,16 +170,16 @@ class MainMenuPage extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                vertical: MyFunction.getHeight(context, 18),
-                                horizontal: MyFunction.getWidth(context, 18),
+                                vertical: Func.getHeight(context, 18),
+                                horizontal: Func.getWidth(context, 18),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Image.asset(
                                     "assets/vector/book_white.png",
-                                    width: MyFunction.getWidth(context, 43.15),
-                                    height: MyFunction.getHeight(context, 51),
+                                    width: Func.getWidth(context, 43.15),
+                                    height: Func.getHeight(context, 51),
                                   ),
                                   const Spacer(),
                                   const Text(
@@ -199,11 +199,11 @@ class MainMenuPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: MyFunction.getHeight(context, 20),
+                      height: Func.getHeight(context, 20),
                     ),
                     Container(
-                      width: MyFunction.getWidth(context, 152),
-                      height: MyFunction.getHeight(context, 155),
+                      width: Func.getWidth(context, 152),
+                      height: Func.getHeight(context, 155),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         color: Colors.white,
@@ -218,12 +218,12 @@ class MainMenuPage extends StatelessWidget {
                       child: Stack(
                         children: [
                           Positioned(
-                            right: MyFunction.getWidth(context, -70),
-                            top: MyFunction.getHeight(context, -8),
+                            right: Func.getWidth(context, -70),
+                            top: Func.getHeight(context, -8),
                             child: Image.asset(
                               "assets/vector/ornament_brown.png",
-                              width: MyFunction.getWidth(context, 137.26),
-                              height: MyFunction.getHeight(
+                              width: Func.getWidth(context, 137.26),
+                              height: Func.getHeight(
                                 context,
                                 146,
                               ),
@@ -231,16 +231,16 @@ class MainMenuPage extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                              vertical: MyFunction.getHeight(context, 18),
-                              horizontal: MyFunction.getWidth(context, 18),
+                              vertical: Func.getHeight(context, 18),
+                              horizontal: Func.getWidth(context, 18),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Image.asset(
                                   "assets/vector/search.png",
-                                  width: MyFunction.getWidth(context, 51),
-                                  height: MyFunction.getHeight(context, 51),
+                                  width: Func.getWidth(context, 51),
+                                  height: Func.getHeight(context, 51),
                                 ),
                                 const Spacer(),
                                 const Text(
@@ -264,8 +264,8 @@ class MainMenuPage extends StatelessWidget {
                 Column(
                   children: [
                     Container(
-                      width: MyFunction.getWidth(context, 152),
-                      height: MyFunction.getHeight(context, 155),
+                      width: Func.getWidth(context, 152),
+                      height: Func.getHeight(context, 155),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         color: Colors.white,
@@ -280,12 +280,12 @@ class MainMenuPage extends StatelessWidget {
                       child: Stack(
                         children: [
                           Positioned(
-                            right: MyFunction.getWidth(context, -70),
-                            top: MyFunction.getHeight(context, -8),
+                            right: Func.getWidth(context, -70),
+                            top: Func.getHeight(context, -8),
                             child: Image.asset(
                               "assets/vector/ornament_brown.png",
-                              width: MyFunction.getWidth(context, 137.26),
-                              height: MyFunction.getHeight(
+                              width: Func.getWidth(context, 137.26),
+                              height: Func.getHeight(
                                 context,
                                 146,
                               ),
@@ -293,16 +293,16 @@ class MainMenuPage extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                              vertical: MyFunction.getHeight(context, 18),
-                              horizontal: MyFunction.getWidth(context, 18),
+                              vertical: Func.getHeight(context, 18),
+                              horizontal: Func.getWidth(context, 18),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Image.asset(
                                   "assets/vector/head.png",
-                                  width: MyFunction.getWidth(context, 51),
-                                  height: MyFunction.getHeight(context, 51),
+                                  width: Func.getWidth(context, 51),
+                                  height: Func.getHeight(context, 51),
                                 ),
                                 const Spacer(),
                                 const Text(
@@ -321,14 +321,14 @@ class MainMenuPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: MyFunction.getHeight(
+                      height: Func.getHeight(
                         context,
                         20,
                       ),
                     ),
                     Container(
-                      width: MyFunction.getWidth(context, 152),
-                      height: MyFunction.getHeight(context, 186),
+                      width: Func.getWidth(context, 152),
+                      height: Func.getHeight(context, 186),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         color: const Color(0xFFDA8856),
@@ -343,12 +343,12 @@ class MainMenuPage extends StatelessWidget {
                       child: Stack(
                         children: [
                           Positioned(
-                            right: MyFunction.getWidth(context, -65),
-                            top: MyFunction.getHeight(context, -8),
+                            right: Func.getWidth(context, -65),
+                            top: Func.getHeight(context, -8),
                             child: Image.asset(
                               "assets/vector/ornament_white.png",
-                              width: MyFunction.getWidth(context, 137.26),
-                              height: MyFunction.getHeight(
+                              width: Func.getWidth(context, 137.26),
+                              height: Func.getHeight(
                                 context,
                                 146,
                               ),
@@ -356,16 +356,16 @@ class MainMenuPage extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                              vertical: MyFunction.getHeight(context, 18),
-                              horizontal: MyFunction.getWidth(context, 18),
+                              vertical: Func.getHeight(context, 18),
+                              horizontal: Func.getWidth(context, 18),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Image.asset(
                                   "assets/vector/dashboard.png",
-                                  width: MyFunction.getWidth(context, 43.15),
-                                  height: MyFunction.getHeight(context, 51),
+                                  width: Func.getWidth(context, 43.15),
+                                  height: Func.getHeight(context, 51),
                                 ),
                                 const Spacer(),
                                 const Text(

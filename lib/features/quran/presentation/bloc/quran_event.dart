@@ -16,3 +16,10 @@ class OnSearch extends QuranEvent {
 
   final String valueSearch;
 }
+
+class OnStartRecite extends QuranEvent {
+  const OnStartRecite(this.numberQuran, this.urlQuran);
+
+  final String numberQuran;
+  final String urlQuran;
+}

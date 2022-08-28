@@ -1,8 +1,10 @@
-import 'package:alquran_mobile_apps/features/list_verse/presentation/pages/list_verse_page.dart';
-import 'package:alquran_mobile_apps/features/quran/data/models/quran_data_model.dart';
+import 'package:alquran_mobile_apps/features/quran/presentation/bloc/quran_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/function.dart';
+import '../../../list_verse/presentation/pages/list_verse_page.dart';
+import '../../data/models/quran_data_model.dart';
 import '../../domain/entities/quran_data.dart';
 
 class ListSurah extends StatelessWidget {
@@ -28,22 +30,22 @@ class ListSurah extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.symmetric(
-          horizontal: MyFunction.getWidth(context, 24),
+          horizontal: Func.getWidth(context, 24),
         ),
         padding: EdgeInsets.symmetric(
-          vertical: MyFunction.getWidth(context, 9),
+          vertical: Func.getWidth(context, 9),
         ),
         child: Row(
           children: [
             SizedBox(
-              width: MyFunction.getWidth(context, 37),
-              height: MyFunction.getHeight(context, 37),
+              width: Func.getWidth(context, 37),
+              height: Func.getHeight(context, 37),
               child: Stack(
                 children: [
                   Image.asset(
                     "assets/vector/number.png",
-                    width: MyFunction.getWidth(context, 37),
-                    height: MyFunction.getHeight(context, 37),
+                    width: Func.getWidth(context, 37),
+                    height: Func.getHeight(context, 37),
                   ),
                   Center(
                     child: Text(
@@ -60,7 +62,7 @@ class ListSurah extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: MyFunction.getWidth(context, 18),
+              width: Func.getWidth(context, 18),
             ),
             Expanded(
               child: Column(
@@ -76,7 +78,7 @@ class ListSurah extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: MyFunction.getHeight(context, 6),
+                    height: Func.getHeight(context, 6),
                   ),
                   Row(
                     children: [
@@ -92,18 +94,18 @@ class ListSurah extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: MyFunction.getWidth(context, 5),
+                        width: Func.getWidth(context, 5),
                       ),
                       Container(
-                        width: MyFunction.getWidth(context, 4),
-                        height: MyFunction.getHeight(context, 4),
+                        width: Func.getWidth(context, 4),
+                        height: Func.getHeight(context, 4),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: const Color(0xFFBBC4CE).withOpacity(0.35),
                         ),
                       ),
                       SizedBox(
-                        width: MyFunction.getWidth(context, 5),
+                        width: Func.getWidth(context, 5),
                       ),
                       Text(
                         "${quranData.ayat} AYAT",
@@ -131,12 +133,22 @@ class ListSurah extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: MyFunction.getWidth(context, 18),
+              width: Func.getWidth(context, 18),
             ),
-            Image.asset(
-              "assets/vector/sound.png",
-              width: MyFunction.getWidth(context, 24),
-              height: MyFunction.getHeight(context, 24),
+            GestureDetector(
+              onTap: () {
+                context.read<QuranBloc>().add(
+                      OnStartRecite(
+                        quranData.nomor,
+                        quranData.audio,
+                      ),
+                    );
+              },
+              child: Image.asset(
+                "assets/vector/sound.png",
+                width: Func.getWidth(context, 24),
+                height: Func.getHeight(context, 24),
+              ),
             ),
           ],
         ),

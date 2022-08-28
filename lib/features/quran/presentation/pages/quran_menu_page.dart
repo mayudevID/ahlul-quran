@@ -32,11 +32,11 @@ class QuranMenuPageContent extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(
-              height: MyFunction.getHeight(context, 48),
+              height: Func.getHeight(context, 48),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: MyFunction.getWidth(context, 24),
+                horizontal: Func.getWidth(context, 24),
               ),
               child: Row(
                 children: [
@@ -49,12 +49,12 @@ class QuranMenuPageContent extends StatelessWidget {
                     },
                     child: Image.asset(
                       "assets/vector/back.png",
-                      width: MyFunction.getWidth(context, 24.62),
-                      height: MyFunction.getHeight(context, 24),
+                      width: Func.getWidth(context, 24.62),
+                      height: Func.getHeight(context, 24),
                     ),
                   ),
                   SizedBox(
-                    width: MyFunction.getWidth(context, 18),
+                    width: Func.getWidth(context, 18),
                   ),
                   const Text(
                     "Al Quran",
@@ -68,33 +68,33 @@ class QuranMenuPageContent extends StatelessWidget {
                   const Spacer(),
                   Image.asset(
                     "assets/vector/ascdesc.png",
-                    width: MyFunction.getWidth(context, 24),
-                    height: MyFunction.getHeight(context, 24),
+                    width: Func.getWidth(context, 24),
+                    height: Func.getHeight(context, 24),
                   ),
                   SizedBox(
-                    width: MyFunction.getWidth(context, 18),
+                    width: Func.getWidth(context, 18),
                   ),
                   Image.asset(
                     "assets/vector/list.png",
-                    width: MyFunction.getWidth(context, 24.63),
-                    height: MyFunction.getHeight(context, 24),
+                    width: Func.getWidth(context, 24.63),
+                    height: Func.getHeight(context, 24),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: MyFunction.getHeight(context, 24),
+              height: Func.getHeight(context, 24),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: MyFunction.getWidth(context, 24),
+                horizontal: Func.getWidth(context, 24),
               ),
               child: SizedBox(
-                height: MyFunction.getHeight(context, 131),
+                height: Func.getHeight(context, 131),
                 child: Stack(
                   children: [
                     Container(
-                      height: MyFunction.getHeight(context, 131),
+                      height: Func.getHeight(context, 131),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: const Color(0xFFE6DEC7),
@@ -103,8 +103,8 @@ class QuranMenuPageContent extends StatelessWidget {
                     ClipPath(
                       clipper: CurveClipper(),
                       child: Container(
-                        width: MyFunction.getWidth(context, 210),
-                        height: MyFunction.getHeight(context, 131),
+                        width: Func.getWidth(context, 210),
+                        height: Func.getHeight(context, 131),
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
@@ -116,10 +116,10 @@ class QuranMenuPageContent extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        left: MyFunction.getWidth(context, 18),
-                        right: MyFunction.getWidth(context, 12),
-                        top: MyFunction.getHeight(context, 18),
-                        bottom: MyFunction.getHeight(context, 18),
+                        left: Func.getWidth(context, 18),
+                        right: Func.getWidth(context, 12),
+                        top: Func.getHeight(context, 18),
+                        bottom: Func.getHeight(context, 18),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,11 +131,11 @@ class QuranMenuPageContent extends StatelessWidget {
                                 children: [
                                   Image.asset(
                                     "assets/vector/small_book.png",
-                                    width: MyFunction.getWidth(context, 20),
-                                    height: MyFunction.getHeight(context, 20),
+                                    width: Func.getWidth(context, 20),
+                                    height: Func.getHeight(context, 20),
                                   ),
                                   SizedBox(
-                                    width: MyFunction.getWidth(context, 8),
+                                    width: Func.getWidth(context, 8),
                                   ),
                                   const Text(
                                     "Terakhir Dibaca",
@@ -172,8 +172,8 @@ class QuranMenuPageContent extends StatelessWidget {
                           Center(
                             child: Image.asset(
                               "assets/vector/logo.png",
-                              width: MyFunction.getWidth(context, 107),
-                              height: MyFunction.getHeight(context, 90),
+                              width: Func.getWidth(context, 107),
+                              height: Func.getHeight(context, 90),
                             ),
                           ),
                         ],
@@ -184,17 +184,17 @@ class QuranMenuPageContent extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: MyFunction.getHeight(context, 24),
+              height: Func.getHeight(context, 24),
             ),
             Container(
               margin: EdgeInsets.symmetric(
-                horizontal: MyFunction.getWidth(context, 24),
+                horizontal: Func.getWidth(context, 24),
               ),
               padding: EdgeInsets.symmetric(
-                horizontal: MyFunction.getWidth(context, 16),
-                vertical: MyFunction.getHeight(context, 8),
+                horizontal: Func.getWidth(context, 16),
+                vertical: Func.getHeight(context, 8),
               ),
-              height: MyFunction.getHeight(context, 40),
+              height: Func.getHeight(context, 40),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: Colors.white,
@@ -233,23 +233,23 @@ class QuranMenuPageContent extends StatelessWidget {
                   ),
                   Image.asset(
                     "assets/vector/search_mini.png",
-                    width: MyFunction.getWidth(context, 24.62),
-                    height: MyFunction.getHeight(context, 24),
+                    width: Func.getWidth(context, 24.62),
+                    height: Func.getHeight(context, 24),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: MyFunction.getHeight(context, 24),
+              height: Func.getHeight(context, 24),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: MyFunction.getWidth(context, 24),
+                horizontal: Func.getWidth(context, 24),
               ),
               child: TabBar(
                 indicator: CircleTabIndicator(
                   color: const Color(0xFFDA8856),
-                  size: MyFunction.getWidth(context, 101),
+                  size: Func.getWidth(context, 101),
                 ),
                 tabs: const [
                   Tab(

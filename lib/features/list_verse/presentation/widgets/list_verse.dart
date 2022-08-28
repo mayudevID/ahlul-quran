@@ -13,23 +13,23 @@ class ListVerse extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.only(
-        top: MyFunction.getHeight(context, 18),
-        left: MyFunction.getWidth(context, 12),
-        right: MyFunction.getWidth(context, 12),
+        top: Func.getHeight(context, 18),
+        left: Func.getWidth(context, 12),
+        right: Func.getWidth(context, 12),
       ),
       color: Colors.transparent,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: MyFunction.getWidth(context, 37),
-            height: MyFunction.getHeight(context, 37),
+            width: Func.getWidth(context, 37),
+            height: Func.getHeight(context, 37),
             child: Stack(
               children: [
                 Image.asset(
                   "assets/vector/number.png",
-                  width: MyFunction.getWidth(context, 37),
-                  height: MyFunction.getHeight(context, 37),
+                  width: Func.getWidth(context, 37),
+                  height: Func.getHeight(context, 37),
                 ),
                 Center(
                   child: Text(
@@ -46,7 +46,7 @@ class ListVerse extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: MyFunction.getWidth(context, 4),
+            width: Func.getWidth(context, 4),
           ),
           Expanded(
             child: Column(
@@ -61,13 +61,13 @@ class ListVerse extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                       color: Colors.black,
                       fontSize: 20,
-                      height: MyFunction.getHeight(context, 2.5),
+                      height: Func.getHeight(context, 2.5),
                     ),
                     textDirection: TextDirection.rtl,
                   ),
                 ),
                 SizedBox(
-                  height: MyFunction.getHeight(context, 12),
+                  height: Func.getHeight(context, 12),
                 ),
                 Align(
                   alignment: Alignment.centerLeft,

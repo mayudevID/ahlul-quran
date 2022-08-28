@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -20,6 +21,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
         super(QuranState()) {
     on<OnGetData>(_onGetData);
     on<OnSearch>(_onSearch);
+    on<OnStartRecite>(_onStartRecite);
   }
 
   final GetQuranData _getQuranData;
@@ -79,5 +81,23 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
 
       emit(state.copyWith(listSurahNew: newData));
     }
+  }
+
+  void _onStartRecite(
+    OnStartRecite event,
+    Emitter<QuranState> emit,
+  ) async {
+    final uri = Uri.parse(event.urlQuran).replace(scheme: "https");
+
+    await state.audioPlayer.play(UrlSource(uri.toString()));
+    emit(state.copyWith(isPlaying: true));
+  }
+
+  @override
+  Future<void> close() {
+    // ignore: todo
+    // TODO: implement close
+    state.audioPlayer.dispose();
+    return super.close();
   }
 }
