@@ -66,10 +66,19 @@ class QuranMenuPageContent extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  Image.asset(
-                    "assets/vector/ascdesc.png",
-                    width: Func.getWidth(context, 24),
-                    height: Func.getHeight(context, 24),
+                  GestureDetector(
+                    onTap: () {
+                      context.read<QuranBloc>().add(const OnReversedList());
+                    },
+                    child: BlocBuilder<QuranBloc, QuranState>(
+                      builder: (context, state) {
+                        return Image.asset(
+                          "assets/vector/${(state.isListReversed) ? "asc" : "desc"}.png",
+                          width: Func.getWidth(context, 24),
+                          height: Func.getHeight(context, 24),
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(
                     width: Func.getWidth(context, 18),

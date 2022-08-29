@@ -6,10 +6,14 @@ class QuranState extends Equatable {
   QuranState({
     List<QuranData>? listSurah,
     List<QuranData>? listSurahNew,
+    AudioPlayer? audioPlayer,
+    this.audioTargetNumber = "999",
     this.loadStatus = LoadStatus.empty,
     this.errorMessage = "",
     this.isPlaying = false,
-    AudioPlayer? audioPlayer,
+    this.isPaused = false,
+    this.isCompleted = false,
+    this.isListReversed = false,
   })  : listSurah = listSurah ?? [],
         listSurahNew = listSurahNew ?? [],
         audioPlayer = audioPlayer ?? AudioPlayer();
@@ -18,16 +22,24 @@ class QuranState extends Equatable {
   final List<QuranData> listSurahNew;
   final LoadStatus loadStatus;
   final String errorMessage;
+  final String audioTargetNumber;
   final AudioPlayer audioPlayer;
   final bool isPlaying;
+  final bool isListReversed;
+  final bool isPaused;
+  final bool isCompleted;
 
   QuranState copyWith({
     final List<QuranData>? listSurah,
     final List<QuranData>? listSurahNew,
     final LoadStatus? loadStatus,
     final String? errorMessage,
+    final String? audioTargetNumber,
     final AudioPlayer? audioPlayer,
     final bool? isPlaying,
+    final bool? isListReversed,
+    final bool? isPaused,
+    final bool? isCompleted,
   }) {
     return QuranState(
       listSurah: listSurah ?? this.listSurah,
@@ -35,7 +47,11 @@ class QuranState extends Equatable {
       loadStatus: loadStatus ?? this.loadStatus,
       errorMessage: errorMessage ?? this.errorMessage,
       audioPlayer: audioPlayer ?? this.audioPlayer,
+      audioTargetNumber: audioTargetNumber ?? this.audioTargetNumber,
       isPlaying: isPlaying ?? this.isPlaying,
+      isListReversed: isListReversed ?? this.isListReversed,
+      isPaused: isPaused ?? this.isPaused,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 
@@ -48,6 +64,10 @@ class QuranState extends Equatable {
         loadStatus,
         errorMessage,
         audioPlayer,
+        audioTargetNumber,
         isPlaying,
+        isListReversed,
+        isPaused,
+        isCompleted,
       ];
 }

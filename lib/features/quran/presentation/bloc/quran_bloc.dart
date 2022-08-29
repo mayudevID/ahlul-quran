@@ -3,6 +3,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
@@ -22,6 +23,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     on<OnGetData>(_onGetData);
     on<OnSearch>(_onSearch);
     on<OnStartRecite>(_onStartRecite);
+    on<OnReversedList>(_onReversedList);
   }
 
   final GetQuranData _getQuranData;
@@ -34,6 +36,19 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
         return CACHE_FAILURE_MESSAGE;
       default:
         return 'Unexpected error';
+    }
+  }
+
+  void _onReversedList(
+    OnReversedList event,
+    Emitter<QuranState> emit,
+  ) {
+    if (state.loadStatus == LoadStatus.loaded) {
+      emit(state.copyWith(
+        listSurah: state.listSurah.reversed.toList(),
+        listSurahNew: state.listSurahNew.reversed.toList(),
+        isListReversed: !state.isListReversed,
+      ));
     }
   }
 
@@ -89,8 +104,21 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
   ) async {
     final uri = Uri.parse(event.urlQuran).replace(scheme: "https");
 
+    await state.audioPlayer.stop();
     await state.audioPlayer.play(UrlSource(uri.toString()));
-    emit(state.copyWith(isPlaying: true));
+    emit(state.copyWith(
+      isPlaying: true,
+      isPaused: false,
+      audioTargetNumber: event.numberQuran,
+    ));
+
+    state.audioPlayer.onDurationChanged.listen((event) {});
+
+    state.audioPlayer.onPositionChanged.listen((event) {});
+
+    state.audioPlayer.onPlayerStateChanged.listen((event) {
+      if (event == PlayerState.completed) {}
+    });
   }
 
   @override

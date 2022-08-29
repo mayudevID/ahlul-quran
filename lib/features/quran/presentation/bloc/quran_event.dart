@@ -23,3 +23,7 @@ class OnStartRecite extends QuranEvent {
   final String numberQuran;
   final String urlQuran;
 }
+
+class OnReversedList extends QuranEvent {
+  const OnReversedList();
+}

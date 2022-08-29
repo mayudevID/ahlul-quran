@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -16,6 +18,7 @@ class ListVerseBloc extends Bloc<ListVerseEvent, ListVerseState> {
       : _getVerseData = getVerseData,
         super(ListVerseState()) {
     on<OnGetVerseData>(_onGetVerseData);
+    on<OnReversedList>(_onReversedList);
   }
 
   final GetVerseData _getVerseData;
@@ -28,6 +31,18 @@ class ListVerseBloc extends Bloc<ListVerseEvent, ListVerseState> {
         return CACHE_FAILURE_MESSAGE;
       default:
         return 'Unexpected error';
+    }
+  }
+
+  void _onReversedList(
+    OnReversedList event,
+    Emitter<ListVerseState> emit,
+  ) {
+    if (state.loadStatus == LoadStatus.loaded) {
+      emit(state.copyWith(
+        listVerse: state.listVerse.reversed.toList(),
+        isListReversed: !state.isListReversed,
+      ));
     }
   }
 
