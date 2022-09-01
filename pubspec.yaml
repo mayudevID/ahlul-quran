@@ -27,7 +27,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  audioplayers: ^1.0.1
   bloc: ^8.1.0
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
@@ -37,6 +36,8 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.1
   get_it: ^7.2.0
+  just_audio: ^0.9.28
+  just_audio_background: ^0.0.1-beta.7
 
 dev_dependencies:
   flutter_lints: ^2.0.0

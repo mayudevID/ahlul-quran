@@ -1,9 +1,12 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:audioplayers/audioplayers.dart';
+//import 'package:audioplayers/audioplayers.dart';
+import 'package:alquran_mobile_apps/main.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
@@ -17,8 +20,9 @@ const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
 
 class QuranBloc extends Bloc<QuranEvent, QuranState> {
-  QuranBloc({required GetQuranData getQuranData})
-      : _getQuranData = getQuranData,
+  QuranBloc({
+    required GetQuranData getQuranData,
+  })  : _getQuranData = getQuranData,
         super(QuranState()) {
     on<OnGetData>(_onGetData);
     on<OnSearch>(_onSearch);
@@ -102,30 +106,36 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     OnStartRecite event,
     Emitter<QuranState> emit,
   ) async {
-    final uri = Uri.parse(event.urlQuran).replace(scheme: "https");
+    final uriSound = Uri.parse(event.quranData.audio).replace(scheme: "https");
 
     await state.audioPlayer.stop();
-    await state.audioPlayer.play(UrlSource(uri.toString()));
+    await state.audioPlayer.setAudioSource(
+      AudioSource.uri(
+        uriSound,
+        tag: MediaItem(
+          id: '1',
+          title: event.quranData.nama,
+          album: "Album",
+          artist: "Artist",
+        ),
+      ),
+    );
+    state.audioPlayer.play();
     emit(state.copyWith(
       isPlaying: true,
       isPaused: false,
-      audioTargetNumber: event.numberQuran,
+      audioTargetNumber: event.quranData.nomor,
     ));
 
-    state.audioPlayer.onDurationChanged.listen((event) {});
+    state.audioPlayer.durationStream.listen((event) {});
+    state.audioPlayer.positionStream.listen((event) {});
 
-    state.audioPlayer.onPositionChanged.listen((event) {});
+    // state.audioPlayer.onDurationChanged.listen((event) {});
 
-    state.audioPlayer.onPlayerStateChanged.listen((event) {
-      if (event == PlayerState.completed) {}
-    });
-  }
+    // state.audioPlayer.onPositionChanged.listen((event) {});
 
-  @override
-  Future<void> close() {
-    // ignore: todo
-    // TODO: implement close
-    state.audioPlayer.dispose();
-    return super.close();
+    // state.audioPlayer.onPlayerStateChanged.listen((event) {
+    //   if (event == PlayerState.completed) {}
+    // });
   }
 }

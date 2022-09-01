@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'injection_container.dart' as di;
 import 'features/home/main_menu.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'audioQuran0',
+    androidNotificationChannelName: 'Audio Quran',
+    androidNotificationOngoing: true,
+  );
   runApp(const MyApp());
 }
 

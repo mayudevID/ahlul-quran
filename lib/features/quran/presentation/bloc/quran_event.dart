@@ -18,10 +18,9 @@ class OnSearch extends QuranEvent {
 }
 
 class OnStartRecite extends QuranEvent {
-  const OnStartRecite(this.numberQuran, this.urlQuran);
+  const OnStartRecite(this.quranData);
 
-  final String numberQuran;
-  final String urlQuran;
+  final QuranData quranData;
 }
 
 class OnReversedList extends QuranEvent {

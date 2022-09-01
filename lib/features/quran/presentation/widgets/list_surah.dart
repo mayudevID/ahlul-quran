@@ -139,10 +139,7 @@ class ListSurah extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 context.read<QuranBloc>().add(
-                      OnStartRecite(
-                        quranData.nomor,
-                        quranData.audio,
-                      ),
+                      OnStartRecite(quranData),
                     );
               },
               child: Image.asset(

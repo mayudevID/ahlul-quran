@@ -1,10 +1,10 @@
-import 'package:alquran_mobile_apps/features/list_verse/domain/usecases/get_verse_data.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import 'features/list_verse/data/datasources/verse_data_remote_data_source.dart';
 import 'features/list_verse/data/repositories/verse_data_repository_impl.dart';
 import 'features/list_verse/domain/repositories/verse_data_repository.dart';
+import 'features/list_verse/domain/usecases/get_verse_data.dart';
 import 'features/list_verse/presentation/bloc/list_verse_bloc.dart';
 import 'features/quran/data/datasources/quran_data_remote_data_source.dart';
 import 'features/quran/data/repositories/quran_data_repository_impl.dart';
