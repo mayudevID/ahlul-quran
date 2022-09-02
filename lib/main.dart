@@ -7,9 +7,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   await JustAudioBackground.init(
-    androidNotificationChannelId: 'audioQuran0',
+    androidNotificationChannelId: 'audioQuran',
     androidNotificationChannelName: 'Audio Quran',
     androidNotificationOngoing: true,
+    androidNotificationIcon: 'mipmap/launcher_icon',
   );
   runApp(const MyApp());
 }

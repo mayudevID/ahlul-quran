@@ -136,17 +136,52 @@ class ListSurah extends StatelessWidget {
             SizedBox(
               width: Func.getWidth(context, 18),
             ),
-            GestureDetector(
-              onTap: () {
-                context.read<QuranBloc>().add(
-                      OnStartRecite(quranData),
+            BlocConsumer<QuranBloc, QuranState>(
+              listener: (context, state) {},
+              builder: (context, state) {
+                if (state.audioTargetNumber == quranData.nomor) {
+                  if (state.isPlaying) {
+                    return GestureDetector(
+                      onTap: () {
+                        context.read<QuranBloc>().add(
+                              const OnPauseRecite(),
+                            );
+                      },
+                      child: Image.asset(
+                        "assets/vector/pause.png",
+                        width: Func.getWidth(context, 24),
+                        height: Func.getHeight(context, 24),
+                      ),
                     );
+                  } else {
+                    return GestureDetector(
+                      onTap: () {
+                        context.read<QuranBloc>().add(
+                              const OnResumeRecite(),
+                            );
+                      },
+                      child: Image.asset(
+                        "assets/vector/play.png",
+                        width: Func.getWidth(context, 24),
+                        height: Func.getHeight(context, 24),
+                      ),
+                    );
+                  }
+                } else {
+                  return GestureDetector(
+                    onTap: () {
+                      context.read<QuranBloc>().add(
+                            OnStartRecite(quranData),
+                          );
+                    },
+                    child: Image.asset(
+                      "assets/vector/sound.png",
+                      width: Func.getWidth(context, 24),
+                      height: Func.getHeight(context, 24),
+                    ),
+                  );
+                }
               },
-              child: Image.asset(
-                "assets/vector/sound.png",
-                width: Func.getWidth(context, 24),
-                height: Func.getHeight(context, 24),
-              ),
             ),
           ],
         ),

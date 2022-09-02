@@ -1,12 +1,11 @@
 // ignore_for_file: constant_identifier_names
 
-//import 'package:audioplayers/audioplayers.dart';
-import 'package:alquran_mobile_apps/main.dart';
-import 'package:audio_service/audio_service.dart';
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
@@ -27,6 +26,12 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     on<OnGetData>(_onGetData);
     on<OnSearch>(_onSearch);
     on<OnStartRecite>(_onStartRecite);
+    on<OnPauseRecite>(_onPauseRecite);
+    on<OnStopOrFinishRecite>(_onStopOrFinishRecite);
+    on<OnResumeRecite>(_onResumeRecite);
+    on<OnPositionStream>(_onPositionStream);
+    on<OnDurationStream>(_onDurationStream);
+    on<OnPlayingStream>(_onPlayingStream);
     on<OnReversedList>(_onReversedList);
   }
 
@@ -116,26 +121,80 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
           id: '1',
           title: event.quranData.nama,
           album: "Album",
-          artist: "Artist",
+          artist: "archive.org",
         ),
       ),
     );
-    state.audioPlayer.play();
     emit(state.copyWith(
-      isPlaying: true,
-      isPaused: false,
+      // isPlaying: true,
+      // isPaused: false,
       audioTargetNumber: event.quranData.nomor,
     ));
 
-    state.audioPlayer.durationStream.listen((event) {});
-    state.audioPlayer.positionStream.listen((event) {});
+    state.audioPlayer.play();
 
-    // state.audioPlayer.onDurationChanged.listen((event) {});
+    add(const OnPositionStream());
+    add(const OnDurationStream());
+    add(const OnPlayingStream());
+  }
 
-    // state.audioPlayer.onPositionChanged.listen((event) {});
+  void _onPositionStream(
+    OnPositionStream event,
+    Emitter<QuranState> emit,
+  ) async {
+    await emit.forEach<Duration>(
+      state.audioPlayer.positionStream,
+      onData: (position) => state.copyWith(
+        position: position.inMilliseconds,
+      ),
+    );
+  }
 
-    // state.audioPlayer.onPlayerStateChanged.listen((event) {
-    //   if (event == PlayerState.completed) {}
-    // });
+  void _onDurationStream(
+    OnDurationStream event,
+    Emitter<QuranState> emit,
+  ) async {
+    await emit.forEach<Duration?>(
+      state.audioPlayer.durationStream,
+      onData: (duration) => state.copyWith(
+        duration: duration?.inMilliseconds ?? 0,
+      ),
+    );
+  }
+
+  void _onPlayingStream(
+    OnPlayingStream event,
+    Emitter<QuranState> emit,
+  ) async {
+    await emit.forEach<bool>(
+      state.audioPlayer.playingStream,
+      onData: (play) => state.copyWith(
+        isPlaying: play,
+      ),
+    );
+  }
+
+  void _onStopOrFinishRecite(
+    OnStopOrFinishRecite event,
+    Emitter<QuranState> emit,
+  ) {
+    emit(state.copyWith(audioTargetNumber: "999"));
+    state.audioPlayer
+      ..stop()
+      ..dispose();
+  }
+
+  void _onPauseRecite(
+    OnPauseRecite event,
+    Emitter<QuranState> emit,
+  ) {
+    state.audioPlayer.pause();
+  }
+
+  void _onResumeRecite(
+    OnResumeRecite event,
+    Emitter<QuranState> emit,
+  ) {
+    state.audioPlayer.play();
   }
 }

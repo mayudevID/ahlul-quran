@@ -34,7 +34,9 @@ dependencies:
   equatable: ^2.0.3
   flutter:
     sdk: flutter
+  flutter_app_name: ^0.1.1
   flutter_bloc: ^8.1.1
+  flutter_launcher_icons: ^0.10.0
   get_it: ^7.2.0
   just_audio: ^0.9.28
   just_audio_background: ^0.0.1-beta.7
@@ -43,6 +45,14 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+
+flutter_app_name:
+  name: "Ahlul Quran"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/vector/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

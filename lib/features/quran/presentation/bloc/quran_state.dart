@@ -14,6 +14,8 @@ class QuranState extends Equatable {
     this.isPaused = false,
     this.isCompleted = false,
     this.isListReversed = false,
+    this.duration = 0,
+    this.position = 0,
   })  : listSurah = listSurah ?? [],
         listSurahNew = listSurahNew ?? [],
         audioPlayer = audioPlayer ?? AudioPlayer();
@@ -24,6 +26,8 @@ class QuranState extends Equatable {
   final String errorMessage;
   final String audioTargetNumber;
   final AudioPlayer audioPlayer;
+  final int duration;
+  final int position;
   final bool isPlaying;
   final bool isListReversed;
   final bool isPaused;
@@ -36,6 +40,8 @@ class QuranState extends Equatable {
     final String? errorMessage,
     final String? audioTargetNumber,
     final AudioPlayer? audioPlayer,
+    final int? duration,
+    final int? position,
     final bool? isPlaying,
     final bool? isListReversed,
     final bool? isPaused,
@@ -48,6 +54,8 @@ class QuranState extends Equatable {
       errorMessage: errorMessage ?? this.errorMessage,
       audioPlayer: audioPlayer ?? this.audioPlayer,
       audioTargetNumber: audioTargetNumber ?? this.audioTargetNumber,
+      duration: duration ?? this.duration,
+      position: position ?? this.position,
       isPlaying: isPlaying ?? this.isPlaying,
       isListReversed: isListReversed ?? this.isListReversed,
       isPaused: isPaused ?? this.isPaused,
