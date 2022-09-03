@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../../../../core/utils/function.dart';
 import '../../../../injection_container.dart';
@@ -350,6 +351,33 @@ class QuranMenuPageContent extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        bottomNavigationBar: BlocBuilder<QuranBloc, QuranState>(
+          buildWhen: (previous, current) {
+            return previous.processingState != current.processingState;
+          },
+          builder: (context, state) {
+            if (state.processingState != ProcessingState.idle) {
+              return Container(
+                height: Func.getHeight(context, 100),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFFDF5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 5,
+                      spreadRadius: 5,
+                    )
+                  ],
+                ),
+                child: Column(
+                  children: [],
+                ),
+              );
+            } else {
+              return SizedBox();
+            }
+          },
         ),
       ),
     );

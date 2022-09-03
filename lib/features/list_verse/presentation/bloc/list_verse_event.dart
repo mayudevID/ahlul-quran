@@ -13,6 +13,6 @@ class OnGetVerseData extends ListVerseEvent {
   final String number;
 }
 
-class OnReversedList extends ListVerseEvent {
-  const OnReversedList();
+class OnReversedListVerse extends ListVerseEvent {
+  const OnReversedListVerse();
 }

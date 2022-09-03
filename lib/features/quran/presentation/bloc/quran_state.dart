@@ -6,26 +6,25 @@ class QuranState extends Equatable {
   QuranState({
     List<QuranData>? listSurah,
     List<QuranData>? listSurahNew,
-    //AudioPlayer? audioPlayer,
     this.audioTargetNumber = "999",
     this.loadStatus = LoadStatus.empty,
     this.errorMessage = "",
-    this.isPlaying = false,
+    this.isPlaying = true,
     this.isPaused = false,
     this.isCompleted = false,
     this.isListReversed = false,
     this.duration = 0,
     this.position = 0,
+    this.processingState = ProcessingState.idle,
   })  : listSurah = listSurah ?? [],
         listSurahNew = listSurahNew ?? [];
-  //audioPlayer = audioPlayer ?? AudioPlayer();
 
   final List<QuranData> listSurah;
   final List<QuranData> listSurahNew;
   final LoadStatus loadStatus;
   final String errorMessage;
   final String audioTargetNumber;
-  //final AudioPlayer audioPlayer;
+  final ProcessingState processingState;
   final int duration;
   final int position;
   final bool isPlaying;
@@ -40,6 +39,7 @@ class QuranState extends Equatable {
     final String? errorMessage,
     final String? audioTargetNumber,
     final AudioPlayer? audioPlayer,
+    final ProcessingState? processingState,
     final int? duration,
     final int? position,
     final bool? isPlaying,
@@ -52,10 +52,10 @@ class QuranState extends Equatable {
       listSurahNew: listSurahNew ?? this.listSurahNew,
       loadStatus: loadStatus ?? this.loadStatus,
       errorMessage: errorMessage ?? this.errorMessage,
-      //audioPlayer: audioPlayer ?? this.audioPlayer,
       audioTargetNumber: audioTargetNumber ?? this.audioTargetNumber,
       duration: duration ?? this.duration,
       position: position ?? this.position,
+      processingState: processingState ?? this.processingState,
       isPlaying: isPlaying ?? this.isPlaying,
       isListReversed: isListReversed ?? this.isListReversed,
       isPaused: isPaused ?? this.isPaused,
@@ -71,8 +71,10 @@ class QuranState extends Equatable {
         listSurahNew,
         loadStatus,
         errorMessage,
-        //audioPlayer,
+        processingState,
         audioTargetNumber,
+        duration,
+        position,
         isPlaying,
         isListReversed,
         isPaused,

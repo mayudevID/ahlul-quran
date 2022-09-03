@@ -1,7 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:just_audio/just_audio.dart';
@@ -34,6 +32,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     on<OnPositionStream>(_onPositionStream);
     on<OnDurationStream>(_onDurationStream);
     on<OnPlayingStream>(_onPlayingStream);
+    on<OnProcessingStream>(_onProcessingStream);
     on<OnReversedList>(_onReversedList);
   }
 
@@ -129,8 +128,6 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
       ),
     );
     emit(state.copyWith(
-      // isPlaying: true,
-      // isPaused: false,
       audioTargetNumber: event.quranData.nomor,
     ));
 
@@ -139,6 +136,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     add(const OnPositionStream());
     add(const OnDurationStream());
     add(const OnPlayingStream());
+    add(const OnProcessingStream());
   }
 
   void _onPositionStream(
@@ -177,15 +175,25 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     );
   }
 
+  void _onProcessingStream(
+    OnProcessingStream event,
+    Emitter<QuranState> emit,
+  ) async {
+    await emit.forEach<ProcessingState>(
+      _audioPlayer.processingStateStream,
+      onData: (process) => state.copyWith(
+        processingState: process,
+      ),
+    );
+  }
+
   void _onStopOrFinishRecite(
     OnStopOrFinishRecite event,
     Emitter<QuranState> emit,
-  ) {
+  ) async {
     emit(state.copyWith(audioTargetNumber: "999"));
     print("Stop");
-    _audioPlayer
-      ..stop()
-      ..dispose();
+    await _audioPlayer.stop();
   }
 
   void _onPauseRecite(

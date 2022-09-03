@@ -50,3 +50,7 @@ class OnDurationStream extends QuranEvent {
 class OnPlayingStream extends QuranEvent {
   const OnPlayingStream();
 }
+
+class OnProcessingStream extends QuranEvent {
+  const OnProcessingStream();
+}

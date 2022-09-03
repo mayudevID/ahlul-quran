@@ -1,29 +1,29 @@
 part of 'list_verse_bloc.dart';
 
-enum LoadStatus { empty, loading, loaded, error }
+enum LoadVerseStatus { empty, loading, loaded, error }
 
 class ListVerseState extends Equatable {
   ListVerseState({
     List<VerseData>? listVerse,
-    this.loadStatus = LoadStatus.empty,
+    this.loadVerseStatus = LoadVerseStatus.empty,
     this.errorMessage = "",
     this.isListReversed = false,
   }) : listVerse = listVerse ?? [];
 
   final List<VerseData> listVerse;
-  final LoadStatus loadStatus;
+  final LoadVerseStatus loadVerseStatus;
   final String errorMessage;
   final bool isListReversed;
 
   ListVerseState copyWith({
     final List<VerseData>? listVerse,
-    final LoadStatus? loadStatus,
+    final LoadVerseStatus? loadVerseStatus,
     final String? errorMessage,
     final bool? isListReversed,
   }) {
     return ListVerseState(
         listVerse: listVerse ?? this.listVerse,
-        loadStatus: loadStatus ?? this.loadStatus,
+        loadVerseStatus: loadVerseStatus ?? this.loadVerseStatus,
         errorMessage: errorMessage ?? this.errorMessage,
         isListReversed: isListReversed ?? this.isListReversed);
   }
@@ -31,7 +31,7 @@ class ListVerseState extends Equatable {
   @override
   List<Object> get props => [
         listVerse,
-        loadStatus,
+        loadVerseStatus,
         errorMessage,
         isListReversed,
       ];

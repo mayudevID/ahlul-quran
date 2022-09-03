@@ -5,13 +5,19 @@ import '../../../../core/utils/function.dart';
 import '../../../../injection_container.dart';
 import '../../../quran/data/models/quran_data_model.dart';
 import '../../../quran/domain/entities/quran_data.dart';
+import '../../../quran/presentation/bloc/quran_bloc.dart';
 import '../bloc/list_verse_bloc.dart';
 import '../widgets/list_verse.dart';
 
 class ListVersePage extends StatelessWidget {
-  const ListVersePage({Key? key, required this.quranData}) : super(key: key);
+  const ListVersePage({
+    Key? key,
+    required this.quranData,
+    required this.quranBloc,
+  }) : super(key: key);
 
   final QuranData quranData;
+  final QuranBloc quranBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +28,21 @@ class ListVersePage extends StatelessWidget {
         ),
       child: ListVersePageContent(
         quranData: quranData,
+        quranBloc: quranBloc,
       ),
     );
   }
 }
 
 class ListVersePageContent extends StatelessWidget {
-  const ListVersePageContent({Key? key, required this.quranData})
-      : super(key: key);
+  const ListVersePageContent({
+    Key? key,
+    required this.quranData,
+    required this.quranBloc,
+  }) : super(key: key);
 
   final QuranData quranData;
+  final QuranBloc quranBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +84,9 @@ class ListVersePageContent extends StatelessWidget {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                    context.read<ListVerseBloc>().add(const OnReversedList());
+                    context
+                        .read<ListVerseBloc>()
+                        .add(const OnReversedListVerse());
                   },
                   child: BlocBuilder<ListVerseBloc, ListVerseState>(
                     builder: (context, state) {
@@ -213,13 +226,13 @@ class ListVersePageContent extends StatelessWidget {
           Expanded(
             child: BlocBuilder<ListVerseBloc, ListVerseState>(
               builder: (context, state) {
-                if (state.loadStatus == LoadStatus.loading) {
+                if (state.loadVerseStatus == LoadVerseStatus.loading) {
                   return const Center(
                     child: CircularProgressIndicator(
                       color: Color(0xFFDA8856),
                     ),
                   );
-                } else if (state.loadStatus == LoadStatus.loaded) {
+                } else if (state.loadVerseStatus == LoadVerseStatus.loaded) {
                   return MediaQuery.removePadding(
                     context: context,
                     removeTop: true,
@@ -232,7 +245,7 @@ class ListVersePageContent extends StatelessWidget {
                       },
                     ),
                   );
-                } else if (state.loadStatus == LoadStatus.error) {
+                } else if (state.loadVerseStatus == LoadVerseStatus.error) {
                   return Center(
                     child: Text(state.errorMessage),
                   );
@@ -246,6 +259,37 @@ class ListVersePageContent extends StatelessWidget {
           )
         ],
       ),
+      bottomNavigationBar: BlocProvider.value(
+        value: quranBloc,
+        child: BlocBuilder<QuranBloc, QuranState>(
+          builder: (context, state) {
+            if (state.isPlaying) {
+              return Container(
+                //height: 0, width: 0,
+                color: Colors.white,
+                height: Func.getHeight(context, 100),
+              );
+            } else {
+              return SizedBox();
+            }
+          },
+        ),
+      ),
     );
   }
 }
+
+
+// bottomNavigationBar: BlocBuilder<QuranBloc, QuranState>(
+      //   builder: (context, state) {
+      //     if (state.isPlaying) {
+      //       return Container(
+      //         //height: 0, width: 0,
+      //         color: Colors.white,
+      //         height: Func.getHeight(context, 100),
+      //       );
+      //     } else {
+      //       return SizedBox();
+      //     }
+      //   },
+      // ),

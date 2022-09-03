@@ -1,6 +1,7 @@
 import 'package:alquran_mobile_apps/features/quran/presentation/bloc/quran_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../../../../core/utils/function.dart';
 import '../../../list_verse/presentation/pages/list_verse_page.dart';
@@ -24,7 +25,10 @@ class ListSurah extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (_) {
-              return ListVersePage(quranData: quranData);
+              return ListVersePage(
+                quranData: quranData,
+                quranBloc: context.read<QuranBloc>(),
+              );
             },
           ),
         );
@@ -137,10 +141,14 @@ class ListSurah extends StatelessWidget {
               width: Func.getWidth(context, 18),
             ),
             BlocConsumer<QuranBloc, QuranState>(
-              listener: (context, state) {},
+              listener: (context, state) {
+                print(state.processingState);
+                print(state.isPlaying);
+              },
               builder: (context, state) {
                 if (state.audioTargetNumber == quranData.nomor) {
-                  if (state.isPlaying) {
+                  if (state.processingState == ProcessingState.ready &&
+                      state.isPlaying) {
                     return GestureDetector(
                       onTap: () {
                         context.read<QuranBloc>().add(
@@ -153,15 +161,45 @@ class ListSurah extends StatelessWidget {
                         height: Func.getHeight(context, 24),
                       ),
                     );
+                  } else if (state.processingState == ProcessingState.ready &&
+                      !state.isPlaying) {
+                    return Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            context.read<QuranBloc>().add(
+                                  const OnResumeRecite(),
+                                );
+                          },
+                          child: Image.asset(
+                            "assets/vector/play.png",
+                            width: Func.getWidth(context, 24),
+                            height: Func.getHeight(context, 24),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            context.read<QuranBloc>().add(
+                                  const OnStopOrFinishRecite(),
+                                );
+                          },
+                          child: Image.asset(
+                            "assets/vector/stop.png",
+                            width: Func.getWidth(context, 24),
+                            height: Func.getHeight(context, 24),
+                          ),
+                        ),
+                      ],
+                    );
                   } else {
                     return GestureDetector(
                       onTap: () {
                         context.read<QuranBloc>().add(
-                              const OnResumeRecite(),
+                              OnStartRecite(quranData),
                             );
                       },
                       child: Image.asset(
-                        "assets/vector/play.png",
+                        "assets/vector/sound.png",
                         width: Func.getWidth(context, 24),
                         height: Func.getHeight(context, 24),
                       ),

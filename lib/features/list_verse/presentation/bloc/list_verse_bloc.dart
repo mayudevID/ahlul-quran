@@ -18,7 +18,7 @@ class ListVerseBloc extends Bloc<ListVerseEvent, ListVerseState> {
       : _getVerseData = getVerseData,
         super(ListVerseState()) {
     on<OnGetVerseData>(_onGetVerseData);
-    on<OnReversedList>(_onReversedList);
+    on<OnReversedListVerse>(_onReversedListVerse);
   }
 
   final GetVerseData _getVerseData;
@@ -34,11 +34,11 @@ class ListVerseBloc extends Bloc<ListVerseEvent, ListVerseState> {
     }
   }
 
-  void _onReversedList(
-    OnReversedList event,
+  void _onReversedListVerse(
+    OnReversedListVerse event,
     Emitter<ListVerseState> emit,
   ) {
-    if (state.loadStatus == LoadStatus.loaded) {
+    if (state.loadVerseStatus == LoadVerseStatus.loaded) {
       emit(state.copyWith(
         listVerse: state.listVerse.reversed.toList(),
         isListReversed: !state.isListReversed,
@@ -50,14 +50,14 @@ class ListVerseBloc extends Bloc<ListVerseEvent, ListVerseState> {
     OnGetVerseData event,
     Emitter<ListVerseState> emit,
   ) async {
-    emit(state.copyWith(loadStatus: LoadStatus.loading));
+    emit(state.copyWith(loadVerseStatus: LoadVerseStatus.loading));
     final failureOrData = await _getVerseData(Params(number: event.number));
     failureOrData.fold(
       (error) {
         emit(
           state.copyWith(
             errorMessage: _mapFailureToMessage(error),
-            loadStatus: LoadStatus.error,
+            loadVerseStatus: LoadVerseStatus.error,
           ),
         );
       },
@@ -65,7 +65,7 @@ class ListVerseBloc extends Bloc<ListVerseEvent, ListVerseState> {
         emit(
           state.copyWith(
             listVerse: data,
-            loadStatus: LoadStatus.loaded,
+            loadVerseStatus: LoadVerseStatus.loaded,
           ),
         );
       },
