@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,18 +43,31 @@ class QuranMenuPageContent extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      Future.delayed(const Duration(milliseconds: 25), () {
-                        Navigator.pop(context);
-                      });
+                  BlocBuilder<QuranBloc, QuranState>(
+                    builder: (context, state) {
+                      return GestureDetector(
+                        onTap: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          if (state.isPlaying) {
+                            if (Platform.isAndroid) {
+                              SystemNavigator.pop();
+                            } else if (Platform.isIOS) {
+                              exit(0);
+                            }
+                          } else {
+                            Future.delayed(const Duration(milliseconds: 25),
+                                () {
+                              Navigator.pop(context);
+                            });
+                          }
+                        },
+                        child: Image.asset(
+                          "assets/vector/back.png",
+                          width: Func.getWidth(context, 24.62),
+                          height: Func.getHeight(context, 24),
+                        ),
+                      );
                     },
-                    child: Image.asset(
-                      "assets/vector/back.png",
-                      width: Func.getWidth(context, 24.62),
-                      height: Func.getHeight(context, 24),
-                    ),
                   ),
                   SizedBox(
                     width: Func.getWidth(context, 18),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/utils/function.dart';
 import '../quran/presentation/pages/quran_menu_page.dart';
@@ -386,7 +387,7 @@ class MainMenuPage extends StatelessWidget {
                   ],
                 )
               ],
-            )
+            ),
           ],
         ),
       ),

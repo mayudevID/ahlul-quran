@@ -21,7 +21,9 @@ const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
 class QuranBloc extends Bloc<QuranEvent, QuranState> {
   QuranBloc({
     required GetQuranData getQuranData,
+    required AudioPlayer audioPlayer,
   })  : _getQuranData = getQuranData,
+        _audioPlayer = audioPlayer,
         super(QuranState()) {
     on<OnGetData>(_onGetData);
     on<OnSearch>(_onSearch);
@@ -36,6 +38,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
   }
 
   final GetQuranData _getQuranData;
+  final AudioPlayer _audioPlayer;
 
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
@@ -113,8 +116,8 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
   ) async {
     final uriSound = Uri.parse(event.quranData.audio).replace(scheme: "https");
 
-    await state.audioPlayer.stop();
-    await state.audioPlayer.setAudioSource(
+    await _audioPlayer.stop();
+    await _audioPlayer.setAudioSource(
       AudioSource.uri(
         uriSound,
         tag: MediaItem(
@@ -131,7 +134,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
       audioTargetNumber: event.quranData.nomor,
     ));
 
-    state.audioPlayer.play();
+    _audioPlayer.play();
 
     add(const OnPositionStream());
     add(const OnDurationStream());
@@ -143,7 +146,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     Emitter<QuranState> emit,
   ) async {
     await emit.forEach<Duration>(
-      state.audioPlayer.positionStream,
+      _audioPlayer.positionStream,
       onData: (position) => state.copyWith(
         position: position.inMilliseconds,
       ),
@@ -155,7 +158,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     Emitter<QuranState> emit,
   ) async {
     await emit.forEach<Duration?>(
-      state.audioPlayer.durationStream,
+      _audioPlayer.durationStream,
       onData: (duration) => state.copyWith(
         duration: duration?.inMilliseconds ?? 0,
       ),
@@ -167,7 +170,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     Emitter<QuranState> emit,
   ) async {
     await emit.forEach<bool>(
-      state.audioPlayer.playingStream,
+      _audioPlayer.playingStream,
       onData: (play) => state.copyWith(
         isPlaying: play,
       ),
@@ -179,7 +182,8 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     Emitter<QuranState> emit,
   ) {
     emit(state.copyWith(audioTargetNumber: "999"));
-    state.audioPlayer
+    print("Stop");
+    _audioPlayer
       ..stop()
       ..dispose();
   }
@@ -188,13 +192,13 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     OnPauseRecite event,
     Emitter<QuranState> emit,
   ) {
-    state.audioPlayer.pause();
+    _audioPlayer.pause();
   }
 
   void _onResumeRecite(
     OnResumeRecite event,
     Emitter<QuranState> emit,
   ) {
-    state.audioPlayer.play();
+    _audioPlayer.play();
   }
 }

@@ -6,7 +6,7 @@ class QuranState extends Equatable {
   QuranState({
     List<QuranData>? listSurah,
     List<QuranData>? listSurahNew,
-    AudioPlayer? audioPlayer,
+    //AudioPlayer? audioPlayer,
     this.audioTargetNumber = "999",
     this.loadStatus = LoadStatus.empty,
     this.errorMessage = "",
@@ -17,15 +17,15 @@ class QuranState extends Equatable {
     this.duration = 0,
     this.position = 0,
   })  : listSurah = listSurah ?? [],
-        listSurahNew = listSurahNew ?? [],
-        audioPlayer = audioPlayer ?? AudioPlayer();
+        listSurahNew = listSurahNew ?? [];
+  //audioPlayer = audioPlayer ?? AudioPlayer();
 
   final List<QuranData> listSurah;
   final List<QuranData> listSurahNew;
   final LoadStatus loadStatus;
   final String errorMessage;
   final String audioTargetNumber;
-  final AudioPlayer audioPlayer;
+  //final AudioPlayer audioPlayer;
   final int duration;
   final int position;
   final bool isPlaying;
@@ -52,7 +52,7 @@ class QuranState extends Equatable {
       listSurahNew: listSurahNew ?? this.listSurahNew,
       loadStatus: loadStatus ?? this.loadStatus,
       errorMessage: errorMessage ?? this.errorMessage,
-      audioPlayer: audioPlayer ?? this.audioPlayer,
+      //audioPlayer: audioPlayer ?? this.audioPlayer,
       audioTargetNumber: audioTargetNumber ?? this.audioTargetNumber,
       duration: duration ?? this.duration,
       position: position ?? this.position,
@@ -71,7 +71,7 @@ class QuranState extends Equatable {
         listSurahNew,
         loadStatus,
         errorMessage,
-        audioPlayer,
+        //audioPlayer,
         audioTargetNumber,
         isPlaying,
         isListReversed,
