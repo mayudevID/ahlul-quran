@@ -1,3 +1,4 @@
+import 'package:alquran_mobile_apps/features/common_widget/run_bottom_bar_widget/component/run_bottom_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -261,19 +262,7 @@ class ListVersePageContent extends StatelessWidget {
       ),
       bottomNavigationBar: BlocProvider.value(
         value: quranBloc,
-        child: BlocBuilder<QuranBloc, QuranState>(
-          builder: (context, state) {
-            if (state.isPlaying) {
-              return Container(
-                //height: 0, width: 0,
-                color: Colors.white,
-                height: Func.getHeight(context, 100),
-              );
-            } else {
-              return SizedBox();
-            }
-          },
-        ),
+        child: const RunBottomBarWidget(),
       ),
     );
   }

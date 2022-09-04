@@ -15,6 +15,8 @@ class QuranState extends Equatable {
     this.isListReversed = false,
     this.duration = 0,
     this.position = 0,
+    this.bufferedPosition = 0,
+    this.dragValue = -1,
     this.processingState = ProcessingState.idle,
   })  : listSurah = listSurah ?? [],
         listSurahNew = listSurahNew ?? [];
@@ -27,6 +29,8 @@ class QuranState extends Equatable {
   final ProcessingState processingState;
   final int duration;
   final int position;
+  final int bufferedPosition;
+  final double dragValue;
   final bool isPlaying;
   final bool isListReversed;
   final bool isPaused;
@@ -42,6 +46,8 @@ class QuranState extends Equatable {
     final ProcessingState? processingState,
     final int? duration,
     final int? position,
+    final int? bufferedPosition,
+    final double? dragValue,
     final bool? isPlaying,
     final bool? isListReversed,
     final bool? isPaused,
@@ -55,6 +61,8 @@ class QuranState extends Equatable {
       audioTargetNumber: audioTargetNumber ?? this.audioTargetNumber,
       duration: duration ?? this.duration,
       position: position ?? this.position,
+      bufferedPosition: bufferedPosition ?? this.bufferedPosition,
+      dragValue: dragValue ?? this.dragValue,
       processingState: processingState ?? this.processingState,
       isPlaying: isPlaying ?? this.isPlaying,
       isListReversed: isListReversed ?? this.isListReversed,
@@ -75,6 +83,8 @@ class QuranState extends Equatable {
         audioTargetNumber,
         duration,
         position,
+        dragValue,
+        bufferedPosition,
         isPlaying,
         isListReversed,
         isPaused,

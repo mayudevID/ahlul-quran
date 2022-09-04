@@ -30,9 +30,12 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     on<OnStopOrFinishRecite>(_onStopOrFinishRecite);
     on<OnResumeRecite>(_onResumeRecite);
     on<OnPositionStream>(_onPositionStream);
+    on<OnBufferedPositionStream>(_onBufferedPositionStream);
     on<OnDurationStream>(_onDurationStream);
     on<OnPlayingStream>(_onPlayingStream);
     on<OnProcessingStream>(_onProcessingStream);
+    on<OnDragValueSlider>(_onDragValueSlider);
+    on<OnSeekEndChanged>(_onSeekEndChanged);
     on<OnReversedList>(_onReversedList);
   }
 
@@ -68,6 +71,13 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     Emitter<QuranState> emit,
   ) async {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
+
+    add(const OnPositionStream());
+    add(const OnBufferedPositionStream());
+    add(const OnDurationStream());
+    add(const OnPlayingStream());
+    add(const OnProcessingStream());
+
     final failureOrData = await _getQuranData(NoParams());
     failureOrData.fold(
       (error) {
@@ -113,10 +123,10 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     OnStartRecite event,
     Emitter<QuranState> emit,
   ) async {
-    final uriSound = Uri.parse(event.quranData.audio).replace(scheme: "https");
-
     await _audioPlayer.stop();
-    await _audioPlayer.setAudioSource(
+
+    final uriSound = Uri.parse(event.quranData.audio).replace(scheme: "https");
+    _audioPlayer.setAudioSource(
       AudioSource.uri(
         uriSound,
         tag: MediaItem(
@@ -132,11 +142,6 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     ));
 
     _audioPlayer.play();
-
-    add(const OnPositionStream());
-    add(const OnDurationStream());
-    add(const OnPlayingStream());
-    add(const OnProcessingStream());
   }
 
   void _onPositionStream(
@@ -147,6 +152,18 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
       _audioPlayer.positionStream,
       onData: (position) => state.copyWith(
         position: position.inMilliseconds,
+      ),
+    );
+  }
+
+  void _onBufferedPositionStream(
+    OnBufferedPositionStream event,
+    Emitter<QuranState> emit,
+  ) async {
+    await emit.forEach<Duration>(
+      _audioPlayer.bufferedPositionStream,
+      onData: (bPosition) => state.copyWith(
+        bufferedPosition: bPosition.inMilliseconds,
       ),
     );
   }
@@ -191,9 +208,32 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     OnStopOrFinishRecite event,
     Emitter<QuranState> emit,
   ) async {
-    emit(state.copyWith(audioTargetNumber: "999"));
-    print("Stop");
     await _audioPlayer.stop();
+    emit(state.copyWith(
+      audioTargetNumber: "999",
+      dragValue: -1,
+      position: 0,
+      duration: 0,
+      processingState: ProcessingState.idle,
+      bufferedPosition: 0,
+      isPlaying: false,
+    ));
+  }
+
+  void _onSeekEndChanged(
+    OnSeekEndChanged event,
+    Emitter<QuranState> emit,
+  ) {
+    _audioPlayer.seek(Duration(milliseconds: event.val.round()));
+    emit(state.copyWith(dragValue: -1));
+    print('AKHIR: ${state.dragValue}');
+  }
+
+  void _onDragValueSlider(
+    OnDragValueSlider event,
+    Emitter<QuranState> emit,
+  ) {
+    emit(state.copyWith(dragValue: event.val));
   }
 
   void _onPauseRecite(

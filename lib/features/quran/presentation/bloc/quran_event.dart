@@ -43,6 +43,10 @@ class OnPositionStream extends QuranEvent {
   const OnPositionStream();
 }
 
+class OnBufferedPositionStream extends QuranEvent {
+  const OnBufferedPositionStream();
+}
+
 class OnDurationStream extends QuranEvent {
   const OnDurationStream();
 }
@@ -53,4 +57,16 @@ class OnPlayingStream extends QuranEvent {
 
 class OnProcessingStream extends QuranEvent {
   const OnProcessingStream();
+}
+
+class OnSeekEndChanged extends QuranEvent {
+  const OnSeekEndChanged(this.val);
+
+  final double val;
+}
+
+class OnDragValueSlider extends QuranEvent {
+  const OnDragValueSlider(this.val);
+
+  final double val;
 }

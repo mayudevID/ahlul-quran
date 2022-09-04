@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:alquran_mobile_apps/features/common_widget/run_bottom_bar_widget/component/run_bottom_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -352,33 +353,7 @@ class QuranMenuPageContent extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: BlocBuilder<QuranBloc, QuranState>(
-          buildWhen: (previous, current) {
-            return previous.processingState != current.processingState;
-          },
-          builder: (context, state) {
-            if (state.processingState != ProcessingState.idle) {
-              return Container(
-                height: Func.getHeight(context, 100),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFFDF5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 5,
-                      spreadRadius: 5,
-                    )
-                  ],
-                ),
-                child: Column(
-                  children: [],
-                ),
-              );
-            } else {
-              return SizedBox();
-            }
-          },
-        ),
+        bottomNavigationBar: const RunBottomBarWidget(),
       ),
     );
   }

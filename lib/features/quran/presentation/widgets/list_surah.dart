@@ -140,71 +140,13 @@ class ListSurah extends StatelessWidget {
             SizedBox(
               width: Func.getWidth(context, 18),
             ),
-            BlocConsumer<QuranBloc, QuranState>(
-              listener: (context, state) {
-                print(state.processingState);
-                print(state.isPlaying);
-              },
+            BlocBuilder<QuranBloc, QuranState>(
               builder: (context, state) {
                 if (state.audioTargetNumber == quranData.nomor) {
-                  if (state.processingState == ProcessingState.ready &&
-                      state.isPlaying) {
-                    return GestureDetector(
-                      onTap: () {
-                        context.read<QuranBloc>().add(
-                              const OnPauseRecite(),
-                            );
-                      },
-                      child: Image.asset(
-                        "assets/vector/pause.png",
-                        width: Func.getWidth(context, 24),
-                        height: Func.getHeight(context, 24),
-                      ),
-                    );
-                  } else if (state.processingState == ProcessingState.ready &&
-                      !state.isPlaying) {
-                    return Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            context.read<QuranBloc>().add(
-                                  const OnResumeRecite(),
-                                );
-                          },
-                          child: Image.asset(
-                            "assets/vector/play.png",
-                            width: Func.getWidth(context, 24),
-                            height: Func.getHeight(context, 24),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            context.read<QuranBloc>().add(
-                                  const OnStopOrFinishRecite(),
-                                );
-                          },
-                          child: Image.asset(
-                            "assets/vector/stop.png",
-                            width: Func.getWidth(context, 24),
-                            height: Func.getHeight(context, 24),
-                          ),
-                        ),
-                      ],
-                    );
-                  } else {
-                    return GestureDetector(
-                      onTap: () {
-                        context.read<QuranBloc>().add(
-                              OnStartRecite(quranData),
-                            );
-                      },
-                      child: Image.asset(
-                        "assets/vector/sound.png",
-                        width: Func.getWidth(context, 24),
-                        height: Func.getHeight(context, 24),
-                      ),
-                    );
-                  }
+                  // if (state.processingState == ProcessingState.ready ||
+                  //     state.isPlaying) {
+                  return Container();
+                  //}
                 } else {
                   return GestureDetector(
                     onTap: () {
@@ -215,7 +157,7 @@ class ListSurah extends StatelessWidget {
                     child: Image.asset(
                       "assets/vector/sound.png",
                       width: Func.getWidth(context, 24),
-                      height: Func.getHeight(context, 24),
+                      height: Func.getWidth(context, 24),
                     ),
                   );
                 }
