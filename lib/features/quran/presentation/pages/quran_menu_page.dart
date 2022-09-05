@@ -357,7 +357,7 @@ class QuranMenuPageContent extends StatelessWidget {
                         );
                       } else if (state.loadStatus == LoadStatus.loaded) {
                         return ListView.builder(
-                          itemCount: 5,
+                          itemCount: 30,
                           itemBuilder: (context, index) {
                             return ListJuz(
                               indexJuz: index + 1,

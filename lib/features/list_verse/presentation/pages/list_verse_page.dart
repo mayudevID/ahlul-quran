@@ -74,7 +74,7 @@ class ListVersePageContent extends StatelessWidget {
                   width: Func.getWidth(context, 18),
                 ),
                 Text(
-                  "Juz ${Func.detectPartOfQuran(quranData)}",
+                  Func.getJuz(int.tryParse(quranData.nomor) ?? 1),
                   style: const TextStyle(
                     fontFamily: "Inter",
                     fontSize: 16,
