@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:alquran_mobile_apps/features/common_widget/run_bottom_bar_widget/component/run_bottom_bar_widget.dart';
+import 'package:alquran_mobile_apps/features/quran/presentation/widgets/list_juz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -346,16 +347,33 @@ class QuranMenuPageContent extends StatelessWidget {
                       }
                     },
                   ),
-                  const Center(
-                    child: Text(
-                      "Dalam tahap pengembangan",
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFFDA8856),
-                      ),
-                    ),
+                  BlocBuilder<QuranBloc, QuranState>(
+                    builder: (context, state) {
+                      if (state.loadStatus == LoadStatus.loading) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Color(0xFFDA8856),
+                          ),
+                        );
+                      } else if (state.loadStatus == LoadStatus.loaded) {
+                        return ListView.builder(
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return ListJuz(
+                              indexJuz: index + 1,
+                            );
+                          },
+                        );
+                      } else if (state.loadStatus == LoadStatus.error) {
+                        return Center(
+                          child: Text(state.errorMessage),
+                        );
+                      } else {
+                        return const Center(
+                          child: Text("Initialize"),
+                        );
+                      }
+                    },
                   ),
                   const Center(
                     child: Text(

@@ -55,4 +55,16 @@ class Func {
       return locate.value;
     }
   }
+
+  static String getDataQuranName(int indexJuz) {
+    final data = DataMap.listJuz.entries
+        .where((element) => element.key == indexJuz)
+        .first
+        .value;
+    final data1k = data[0].keys.first;
+    final data1v = data[0].values.first;
+    final data2k = data[1].keys.first;
+    final data2v = data[1].values.first;
+    return "QS. [$data1k:$data1v] - QS. [$data2k:$data2v]";
+  }
 }
