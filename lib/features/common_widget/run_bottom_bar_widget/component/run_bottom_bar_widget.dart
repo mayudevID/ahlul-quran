@@ -1,13 +1,11 @@
-import 'dart:math';
-
-import 'package:alquran_mobile_apps/features/common_widget/run_bottom_bar_widget/wdgets/control_sound.dart';
-import 'package:alquran_mobile_apps/features/common_widget/run_bottom_bar_widget/wdgets/slider_sound.dart';
-import 'package:alquran_mobile_apps/features/quran/presentation/bloc/quran_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 
 import '../../../../core/utils/function.dart';
+import '../../../quran/presentation/bloc/quran_bloc.dart';
+import '../wdgets/control_sound.dart';
+import '../wdgets/slider_sound.dart';
 
 class RunBottomBarWidget extends StatelessWidget {
   const RunBottomBarWidget({super.key});
@@ -33,7 +31,7 @@ class RunBottomBarWidget extends StatelessWidget {
               ],
             ),
             child: Column(
-              children: [
+              children: const [
                 SliderSound(),
                 ControlSound(),
               ],

@@ -94,7 +94,7 @@ class ListVersePageContent extends StatelessWidget {
                       return Image.asset(
                         "assets/vector/${(state.isListReversed) ? "asc" : "desc"}.png",
                         width: Func.getWidth(context, 24),
-                        height: Func.getHeight(context, 24),
+                        height: Func.getWidth(context, 24),
                       );
                     },
                   ),
@@ -105,15 +105,15 @@ class ListVersePageContent extends StatelessWidget {
                 Image.asset(
                   "assets/vector/unduh.png",
                   width: Func.getWidth(context, 24),
-                  height: Func.getHeight(context, 24),
+                  height: Func.getWidth(context, 24),
                 ),
                 SizedBox(
                   width: Func.getWidth(context, 18),
                 ),
                 Image.asset(
                   "assets/vector/list.png",
-                  width: Func.getWidth(context, 24.63),
-                  height: Func.getHeight(context, 24),
+                  width: Func.getWidth(context, 24),
+                  height: Func.getWidth(context, 24),
                 ),
               ],
             ),

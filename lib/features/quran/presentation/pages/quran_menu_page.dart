@@ -346,8 +346,28 @@ class QuranMenuPageContent extends StatelessWidget {
                       }
                     },
                   ),
-                  Text("B"),
-                  Text("C"),
+                  const Center(
+                    child: Text(
+                      "Dalam tahap pengembangan",
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFFDA8856),
+                      ),
+                    ),
+                  ),
+                  const Center(
+                    child: Text(
+                      "Tidak tersedia",
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFFDA8856),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -33,7 +33,7 @@ class ControlSound extends StatelessWidget {
                     "${state.listSurah.where((element) => element.nomor == state.audioTargetNumber).first.nama} (${state.audioTargetNumber})",
                     style: const TextStyle(
                       fontFamily: "Poppins",
-                      fontSize: 14,
+                      fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: Color(0xFFDA8856),
                     ),
@@ -129,21 +129,77 @@ class ControlSound extends StatelessWidget {
                   ),
                 );
               } else {
-                return GestureDetector(
-                  onTap: () {
-                    // context.read<QuranBloc>().add(
-                    //       OnStartRecite(quranData),
-                    //     );
-                  },
-                  child: Image.asset(
-                    "assets/vector/sound.png",
-                    width: Func.getWidth(context, 24),
-                    height: Func.getWidth(context, 24),
-                  ),
-                );
+                return Container();
               }
-              ;
             },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              BlocBuilder<QuranBloc, QuranState>(
+                builder: (context, state) {
+                  final hoursStr = ((state.position / 3600000) % 60)
+                      .floor()
+                      .toString()
+                      .padLeft(2, '0');
+                  final minutesStr = ((state.position / 60000) % 60)
+                      .floor()
+                      .toString()
+                      .padLeft(2, '0');
+                  final secondsStr = (state.position / 1000 % 60)
+                      .floor()
+                      .toString()
+                      .padLeft(2, '0');
+                  return Text(
+                    (hoursStr == "00")
+                        ? "$minutesStr:$secondsStr"
+                        : "$hoursStr:$minutesStr:$secondsStr",
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFDA8856),
+                    ),
+                  );
+                },
+              ),
+              const Text(
+                " / ",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFFDA8856),
+                ),
+              ),
+              BlocBuilder<QuranBloc, QuranState>(
+                builder: (context, state) {
+                  final hoursStr = ((state.duration / 3600000) % 60)
+                      .floor()
+                      .toString()
+                      .padLeft(2, '0');
+                  final minutesStr = ((state.duration / 60000) % 60)
+                      .floor()
+                      .toString()
+                      .padLeft(2, '0');
+                  final secondsStr = (state.duration / 1000 % 60)
+                      .floor()
+                      .toString()
+                      .padLeft(2, '0');
+                  return Text(
+                    (hoursStr == "00")
+                        ? "$minutesStr:$secondsStr"
+                        : "$hoursStr:$minutesStr:$secondsStr",
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFFDA8856),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),
