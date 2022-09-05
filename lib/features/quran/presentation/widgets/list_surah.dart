@@ -1,12 +1,11 @@
-import 'package:alquran_mobile_apps/features/quran/presentation/bloc/quran_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart';
 
 import '../../../../core/utils/function.dart';
 import '../../../list_verse/presentation/pages/list_verse_page.dart';
 import '../../data/models/quran_data_model.dart';
 import '../../domain/entities/quran_data.dart';
+import '../bloc/quran_bloc.dart';
 
 class ListSurah extends StatelessWidget {
   const ListSurah({
@@ -144,11 +143,9 @@ class ListSurah extends StatelessWidget {
                 ),
                 BlocBuilder<QuranBloc, QuranState>(
                   builder: (context, state) {
-                    if (state.audioTargetNumber == quranData.nomor) {
-                      // if (state.processingState == ProcessingState.ready ||
-                      //     state.isPlaying) {
+                    if (state.audioTargetNumber ==
+                        int.tryParse(quranData.nomor)) {
                       return Container();
-                      //}
                     } else {
                       return GestureDetector(
                         onTap: () {

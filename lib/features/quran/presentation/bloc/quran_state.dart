@@ -6,7 +6,7 @@ class QuranState extends Equatable {
   QuranState({
     List<QuranData>? listSurah,
     List<QuranData>? listSurahNew,
-    this.audioTargetNumber = "999",
+    this.audioTargetNumber = 999,
     this.loadStatus = LoadStatus.empty,
     this.errorMessage = "",
     this.isPlaying = true,
@@ -25,7 +25,7 @@ class QuranState extends Equatable {
   final List<QuranData> listSurahNew;
   final LoadStatus loadStatus;
   final String errorMessage;
-  final String audioTargetNumber;
+  final int audioTargetNumber;
   final ProcessingState processingState;
   final int duration;
   final int position;
@@ -41,7 +41,7 @@ class QuranState extends Equatable {
     final List<QuranData>? listSurahNew,
     final LoadStatus? loadStatus,
     final String? errorMessage,
-    final String? audioTargetNumber,
+    final int? audioTargetNumber,
     final AudioPlayer? audioPlayer,
     final ProcessingState? processingState,
     final int? duration,

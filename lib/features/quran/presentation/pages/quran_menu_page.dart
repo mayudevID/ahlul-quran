@@ -1,16 +1,15 @@
 import 'dart:io';
 
-import 'package:alquran_mobile_apps/features/common_widget/run_bottom_bar_widget/component/run_bottom_bar_widget.dart';
-import 'package:alquran_mobile_apps/features/quran/presentation/widgets/list_juz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart';
 
 import '../../../../core/utils/function.dart';
 import '../../../../injection_container.dart';
+import '../../../common_widget/run_bottom_bar_widget/component/run_bottom_bar_widget.dart';
 import '../bloc/quran_bloc.dart';
+import '../widgets/list_juz.dart';
 import '../widgets/list_surah.dart';
 import '../widgets/curve_clipper.dart';
 

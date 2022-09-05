@@ -28,6 +28,7 @@ class QuranData extends Equatable {
   });
 
   @override
+  // ignore: todo
   // TODO: implement props
   List<Object?> get props => [
         arti,

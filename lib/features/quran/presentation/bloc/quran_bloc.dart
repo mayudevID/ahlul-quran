@@ -138,7 +138,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
       ),
     );
     emit(state.copyWith(
-      audioTargetNumber: event.quranData.nomor,
+      audioTargetNumber: int.tryParse(event.quranData.nomor),
     ));
 
     _audioPlayer.play();
@@ -210,7 +210,7 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
   ) async {
     await _audioPlayer.stop();
     emit(state.copyWith(
-      audioTargetNumber: "999",
+      audioTargetNumber: 999,
       dragValue: -1,
       position: 0,
       duration: 0,
@@ -226,7 +226,6 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
   ) {
     _audioPlayer.seek(Duration(milliseconds: event.val.round()));
     emit(state.copyWith(dragValue: -1));
-    print('AKHIR: ${state.dragValue}');
   }
 
   void _onDragValueSlider(

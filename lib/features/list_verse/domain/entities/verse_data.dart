@@ -14,6 +14,7 @@ class VerseData extends Equatable {
   });
 
   @override
+  // ignore: todo
   // TODO: implement props
   List<Object?> get props => [ar, id, nomor, tr];
 }

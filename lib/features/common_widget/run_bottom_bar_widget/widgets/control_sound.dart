@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -30,7 +28,7 @@ class ControlSound extends StatelessWidget {
                 },
                 builder: (context, state) {
                   return Text(
-                    "${state.listSurah.where((element) => element.nomor == state.audioTargetNumber).first.nama} (${state.audioTargetNumber})",
+                    "${state.listSurah.where((element) => int.tryParse(element.nomor) == state.audioTargetNumber).first.nama} (${state.audioTargetNumber})",
                     style: const TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 13,

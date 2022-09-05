@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/function.dart';
-import '../../../../core/utils/data_map.dart';
 
 class ListJuz extends StatelessWidget {
   const ListJuz({super.key, required this.indexJuz});
