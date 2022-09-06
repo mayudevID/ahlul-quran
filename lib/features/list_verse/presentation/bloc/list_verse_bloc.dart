@@ -1,5 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
+import 'dart:math';
+
+import 'package:alquran_mobile_apps/features/list_verse/domain/entities/single_verse_data.dart';
+import 'package:alquran_mobile_apps/features/list_verse/domain/usecases/save_marker.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -14,14 +18,19 @@ const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
 
 class ListVerseBloc extends Bloc<ListVerseEvent, ListVerseState> {
-  ListVerseBloc({required GetVerseData getVerseData})
-      : _getVerseData = getVerseData,
+  ListVerseBloc({
+    required GetVerseData getVerseData,
+    required SaveMarker saveMarker,
+  })  : _getVerseData = getVerseData,
+        _saveMarker = saveMarker,
         super(ListVerseState()) {
     on<OnGetVerseData>(_onGetVerseData);
     on<OnReversedListVerse>(_onReversedListVerse);
+    on<OnMarkerSurah>(_onMarkerSurah);
   }
 
   final GetVerseData _getVerseData;
+  final SaveMarker _saveMarker;
 
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
@@ -70,5 +79,9 @@ class ListVerseBloc extends Bloc<ListVerseEvent, ListVerseState> {
         );
       },
     );
+  }
+
+  void _onMarkerSurah(OnMarkerSurah event, Emitter<ListVerseState> emit) async {
+    await _saveMarker(ParamsData(singleVerseData: event.singleVerseData));
   }
 }

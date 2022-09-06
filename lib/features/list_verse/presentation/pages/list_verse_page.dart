@@ -83,20 +83,23 @@ class ListVersePageContent extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    context
-                        .read<ListVerseBloc>()
-                        .add(const OnReversedListVerse());
-                  },
-                  child: BlocBuilder<ListVerseBloc, ListVerseState>(
-                    builder: (context, state) {
-                      return Image.asset(
-                        "assets/vector/${(state.isListReversed) ? "asc" : "desc"}.png",
-                        width: Func.getWidth(context, 24),
-                        height: Func.getWidth(context, 24),
-                      );
+                Material(
+                  color: const Color(0xFFFFFDF5),
+                  child: InkWell(
+                    onTap: () {
+                      context
+                          .read<ListVerseBloc>()
+                          .add(const OnReversedListVerse());
                     },
+                    child: BlocBuilder<ListVerseBloc, ListVerseState>(
+                      builder: (context, state) {
+                        return Image.asset(
+                          "assets/vector/${(state.isListReversed) ? "asc" : "desc"}.png",
+                          width: Func.getWidth(context, 24),
+                          height: Func.getWidth(context, 24),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -242,6 +245,7 @@ class ListVersePageContent extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return ListVerse(
                           verseData: state.listVerse[index],
+                          quranData: quranData,
                         );
                       },
                     ),

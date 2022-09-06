@@ -16,3 +16,9 @@ class OnGetVerseData extends ListVerseEvent {
 class OnReversedListVerse extends ListVerseEvent {
   const OnReversedListVerse();
 }
+
+class OnMarkerSurah extends ListVerseEvent {
+  const OnMarkerSurah(this.singleVerseData);
+
+  final SingleVerseData singleVerseData;
+}
