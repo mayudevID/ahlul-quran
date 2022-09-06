@@ -70,3 +70,7 @@ class OnDragValueSlider extends QuranEvent {
 
   final double val;
 }
+
+class OnIndexStream extends QuranEvent {
+  const OnIndexStream();
+}

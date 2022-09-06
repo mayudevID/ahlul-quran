@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart';
 
 import '../../../../core/utils/function.dart';
 import '../../../quran/presentation/bloc/quran_bloc.dart';
@@ -12,28 +11,12 @@ class RunBottomBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<QuranBloc, QuranState>(
-      listenWhen: (previous, current) {
-        return previous.processingState != current.processingState;
-      },
-      listener: (context, state) {
-        if (state.processingState == ProcessingState.completed) {
-          Future.delayed(
-            const Duration(milliseconds: 50),
-          ).then((value) {
-            final nextPlay = state.listSurah
-                .where((element) =>
-                    int.tryParse(element.nomor) == state.audioTargetNumber + 1)
-                .first;
-            context.read<QuranBloc>().add(OnStartRecite(nextPlay));
-          });
-        }
-      },
+    return BlocBuilder<QuranBloc, QuranState>(
       buildWhen: (previous, current) {
-        return previous.processingState != current.processingState;
+        return previous.isPlaying != current.isPlaying || current.position == 0;
       },
       builder: (context, state) {
-        if (state.processingState != ProcessingState.idle) {
+        if (state.isPlaying || state.position != 0) {
           return Container(
             height: Func.getHeight(context, 100),
             decoration: BoxDecoration(

@@ -144,7 +144,8 @@ class ListSurah extends StatelessWidget {
                 BlocBuilder<QuranBloc, QuranState>(
                   builder: (context, state) {
                     if (state.audioTargetNumber ==
-                        int.tryParse(quranData.nomor)) {
+                            int.tryParse(quranData.nomor) &&
+                        state.isPlaying) {
                       return Container();
                     } else {
                       return GestureDetector(

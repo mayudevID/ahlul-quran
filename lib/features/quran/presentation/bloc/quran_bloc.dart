@@ -19,9 +19,7 @@ const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
 class QuranBloc extends Bloc<QuranEvent, QuranState> {
   QuranBloc({
     required GetQuranData getQuranData,
-    required AudioPlayer audioPlayer,
   })  : _getQuranData = getQuranData,
-        _audioPlayer = audioPlayer,
         super(QuranState()) {
     on<OnGetData>(_onGetData);
     on<OnSearch>(_onSearch);
@@ -37,10 +35,11 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     on<OnDragValueSlider>(_onDragValueSlider);
     on<OnSeekEndChanged>(_onSeekEndChanged);
     on<OnReversedList>(_onReversedList);
+    on<OnIndexStream>(_onIndexStream);
   }
 
   final GetQuranData _getQuranData;
-  final AudioPlayer _audioPlayer;
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
@@ -72,12 +71,6 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
   ) async {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
 
-    add(const OnPositionStream());
-    add(const OnBufferedPositionStream());
-    add(const OnDurationStream());
-    add(const OnPlayingStream());
-    add(const OnProcessingStream());
-
     final failureOrData = await _getQuranData(NoParams());
     failureOrData.fold(
       (error) {
@@ -88,16 +81,45 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
           ),
         );
       },
-      (data) {
+      (qData) {
+        final List<AudioSource> listAudioSource = [];
+
+        for (int i = 0; i < qData.length; i++) {
+          listAudioSource.add(
+            AudioSource.uri(
+              Uri.parse(qData[i].audio).replace(scheme: "https"),
+              tag: MediaItem(
+                id: i.toString(),
+                title: qData[i].nama,
+                artist: "archive.org",
+              ),
+            ),
+          );
+        }
+
+        _audioPlayer.setAudioSource(
+          ConcatenatingAudioSource(
+            useLazyPreparation: true,
+            children: listAudioSource,
+          ),
+        );
+
         emit(
           state.copyWith(
-            listSurah: data,
-            listSurahNew: data,
+            listSurah: qData,
+            listSurahNew: qData,
             loadStatus: LoadStatus.loaded,
           ),
         );
       },
     );
+
+    add(const OnPositionStream());
+    add(const OnBufferedPositionStream());
+    add(const OnDurationStream());
+    add(const OnPlayingStream());
+    add(const OnProcessingStream());
+    add(const OnIndexStream());
   }
 
   void _onSearch(
@@ -123,23 +145,14 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     OnStartRecite event,
     Emitter<QuranState> emit,
   ) async {
-    await _audioPlayer.stop();
-
-    final uriSound = Uri.parse(event.quranData.audio).replace(scheme: "https");
-    _audioPlayer.setAudioSource(
-      AudioSource.uri(
-        uriSound,
-        tag: MediaItem(
-          id: '1',
-          title: event.quranData.nama,
-          album: "Album",
-          artist: "archive.org",
-        ),
-      ),
+    _audioPlayer.seek(
+      Duration.zero,
+      index: (int.tryParse(event.quranData.nomor) ?? 0) - 1,
     );
-    emit(state.copyWith(
-      audioTargetNumber: int.tryParse(event.quranData.nomor),
-    ));
+
+    // emit(state.copyWith(
+    //   audioTargetNumber: int.tryParse(event.quranData.nomor),
+    // ));
 
     _audioPlayer.play();
   }
@@ -204,6 +217,16 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     );
   }
 
+  void _onIndexStream(
+    OnIndexStream event,
+    Emitter<QuranState> emit,
+  ) async {
+    await emit.forEach<int?>(
+      _audioPlayer.currentIndexStream,
+      onData: (index) => state.copyWith(audioTargetNumber: (index ?? 0) + 1),
+    );
+  }
+
   void _onStopOrFinishRecite(
     OnStopOrFinishRecite event,
     Emitter<QuranState> emit,
@@ -247,5 +270,13 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     Emitter<QuranState> emit,
   ) {
     _audioPlayer.play();
+  }
+
+  @override
+  Future<void> close() {
+    // ignore: todo
+    // TODO: implement close
+    _audioPlayer.dispose();
+    return super.close();
   }
 }

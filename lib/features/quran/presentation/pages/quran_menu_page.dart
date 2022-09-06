@@ -425,7 +425,10 @@ class _CirclePainter extends BoxPainter {
       offset + Offset(size + 5, cfg.size!.height),
       _paint,
     );
-    // RRect fullRect = RRect.fromRectAndRadius(
+  }
+}
+
+// RRect fullRect = RRect.fromRectAndRadius(
     //   Rect.fromCenter(
     //     center: offset + Offset(65, cfg.size!.height),
     //     width: 50,
@@ -434,5 +437,3 @@ class _CirclePainter extends BoxPainter {
     //   const Radius.circular(10),
     // );
     // canvas.drawRRect(fullRect, _paint);
-  }
-}

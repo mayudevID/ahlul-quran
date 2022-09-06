@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:just_audio/just_audio.dart';
 
 import 'features/list_verse/data/datasources/verse_data_remote_data_source.dart';
 import 'features/list_verse/data/repositories/verse_data_repository_impl.dart';
@@ -17,7 +16,7 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   //! BLOC
-  sl.registerFactory(() => QuranBloc(getQuranData: sl(), audioPlayer: sl()));
+  sl.registerFactory(() => QuranBloc(getQuranData: sl()));
   sl.registerFactory(() => ListVerseBloc(getVerseData: sl()));
 
   //! USE CASES
@@ -44,5 +43,4 @@ Future<void> init() async {
 
   //! EXTERNAL
   sl.registerLazySingleton(() => Dio());
-  sl.registerLazySingleton(() => AudioPlayer());
 }
