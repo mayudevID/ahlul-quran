@@ -1,6 +1,6 @@
-# alquran_mobile_apps
+# Ahlul Quran
 
-A new Flutter project.
+Online Quran recite app with features of Quran mp3 player
 
 ## Getting Started
 
