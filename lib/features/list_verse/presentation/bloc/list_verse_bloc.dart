@@ -1,7 +1,4 @@
 // ignore_for_file: constant_identifier_names
-
-import 'dart:math';
-
 import 'package:alquran_mobile_apps/features/list_verse/domain/entities/single_verse_data.dart';
 import 'package:alquran_mobile_apps/features/list_verse/domain/usecases/save_marker.dart';
 import 'package:bloc/bloc.dart';

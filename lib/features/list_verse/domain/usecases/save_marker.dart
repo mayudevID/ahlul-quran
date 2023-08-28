@@ -1,4 +1,3 @@
-import 'package:alquran_mobile_apps/features/quran/domain/entities/quran_data.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 

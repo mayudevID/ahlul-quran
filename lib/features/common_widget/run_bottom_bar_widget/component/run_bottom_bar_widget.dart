@@ -29,8 +29,8 @@ class RunBottomBarWidget extends StatelessWidget {
                 )
               ],
             ),
-            child: Column(
-              children: const [
+            child: const Column(
+              children: [
                 SliderSound(),
                 ControlSound(),
               ],
