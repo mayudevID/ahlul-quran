@@ -276,12 +276,10 @@ class QuranMenuPageContent extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: Func.getWidth(context, 24),
               ),
-              child: TabBar(
-                indicator: CircleTabIndicator(
-                  color: const Color(0xFFDA8856),
-                  size: Func.getWidth(context, 101),
-                ),
-                tabs: const [
+              child: const TabBar(
+                indicatorColor: Color(0xFFDA8856),
+                indicatorSize: TabBarIndicatorSize.tab,
+                tabs: [
                   Tab(
                     child: Text(
                       "Surah",
