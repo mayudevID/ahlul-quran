@@ -4,7 +4,7 @@ import '../../core/utils/function.dart';
 import '../quran/presentation/pages/quran_menu_page.dart';
 
 class MainMenuPage extends StatelessWidget {
-  MainMenuPage({Key? key}) : super(key: key);
+  MainMenuPage({super.key});
 
   final Shader linearGradient = const LinearGradient(
     colors: <Color>[Color(0xffFFBF8A), Color(0xffD38545)],

@@ -2,11 +2,11 @@ import 'package:alquran_mobile_apps/features/list_verse/domain/entities/verse_da
 
 class VerseDataModel extends VerseData {
   const VerseDataModel({
-    required String ar,
-    required String id,
-    required String nomor,
-    required String tr,
-  }) : super(ar: ar, nomor: nomor, id: id, tr: tr);
+    required super.ar,
+    required super.id,
+    required super.nomor,
+    required super.tr,
+  });
 
   factory VerseDataModel.fromJson(Map<String, dynamic> json) => VerseDataModel(
         ar: json["ar"],

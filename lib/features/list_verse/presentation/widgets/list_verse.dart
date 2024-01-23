@@ -9,10 +9,10 @@ import '../../../../core/utils/function.dart';
 
 class ListVerse extends StatelessWidget {
   const ListVerse({
-    Key? key,
+    super.key,
     required this.verseData,
     required this.quranData,
-  }) : super(key: key);
+  });
 
   final VerseData verseData;
   final QuranData quranData;

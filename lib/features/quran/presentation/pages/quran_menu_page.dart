@@ -14,7 +14,7 @@ import '../widgets/list_surah.dart';
 import '../widgets/curve_clipper.dart';
 
 class QuranMenuPage extends StatelessWidget {
-  const QuranMenuPage({Key? key}) : super(key: key);
+  const QuranMenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class QuranMenuPage extends StatelessWidget {
 }
 
 class QuranMenuPageContent extends StatelessWidget {
-  const QuranMenuPageContent({Key? key}) : super(key: key);
+  const QuranMenuPageContent({super.key});
 
   @override
   Widget build(BuildContext context) {

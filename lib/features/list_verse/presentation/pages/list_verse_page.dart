@@ -12,10 +12,10 @@ import '../widgets/list_verse.dart';
 
 class ListVersePage extends StatelessWidget {
   const ListVersePage({
-    Key? key,
+    super.key,
     required this.quranData,
     required this.quranBloc,
-  }) : super(key: key);
+  });
 
   final QuranData quranData;
   final QuranBloc quranBloc;
@@ -37,10 +37,10 @@ class ListVersePage extends StatelessWidget {
 
 class ListVersePageContent extends StatelessWidget {
   const ListVersePageContent({
-    Key? key,
+    super.key,
     required this.quranData,
     required this.quranBloc,
-  }) : super(key: key);
+  });
 
   final QuranData quranData;
   final QuranBloc quranBloc;

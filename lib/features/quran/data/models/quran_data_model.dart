@@ -4,28 +4,17 @@ import 'package:alquran_mobile_apps/features/quran/domain/entities/quran_data.da
 
 class QuranDataModel extends QuranData {
   const QuranDataModel({
-    required String arti,
-    required String asma,
-    required String audio,
-    required int ayat,
-    required String keterangan,
-    required String nama,
-    required String nomor,
-    required String rukuk,
-    required VerseType type,
-    required String urut,
-  }) : super(
-          arti: arti,
-          asma: asma,
-          audio: audio,
-          ayat: ayat,
-          keterangan: keterangan,
-          nama: nama,
-          nomor: nomor,
-          rukuk: rukuk,
-          type: type,
-          urut: urut,
-        );
+    required super.arti,
+    required super.asma,
+    required super.audio,
+    required super.ayat,
+    required super.keterangan,
+    required super.nama,
+    required super.nomor,
+    required super.rukuk,
+    required super.type,
+    required super.urut,
+  });
 
   factory QuranDataModel.fromJson(Map<String, dynamic> json) => QuranDataModel(
         arti: json["arti"],

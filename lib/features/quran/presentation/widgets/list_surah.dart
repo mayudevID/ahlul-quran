@@ -9,9 +9,9 @@ import '../bloc/quran_bloc.dart';
 
 class ListSurah extends StatelessWidget {
   const ListSurah({
-    Key? key,
+    super.key,
     required this.quranData,
-  }) : super(key: key);
+  });
 
   final QuranData quranData;
 
